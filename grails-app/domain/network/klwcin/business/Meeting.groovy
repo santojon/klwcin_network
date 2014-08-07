@@ -18,4 +18,8 @@ class Meeting {
 		type(inList: ["Ascension", "Common", "Council", "Special"])
 		date(validator: {return (it > new Date())})
     }
+	
+	String toString() {
+		"${creator}, ${participants}"
+	}
 }

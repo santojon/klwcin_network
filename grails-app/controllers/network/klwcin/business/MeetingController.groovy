@@ -3,12 +3,16 @@ package network.klwcin.business
 import static org.springframework.http.HttpStatus.*
 import grails.plugin.springsecurity.annotation.Secured;
 import grails.transaction.Transactional
+import network.klwcin.security.User
 
 @Transactional(readOnly = true)
 @Secured(['ROLE_ADMIN', 'ROLE_USER'])
 class MeetingController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+	def springSecurityService
+	ArrayList<User> a = new ArrayList<User>()
+	//boolean participate = false
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -16,12 +20,31 @@ class MeetingController {
     }
 
     def show(Meeting meetingInstance) {
-        respond meetingInstance
+		
+		//Actual user
+		User u = User.get(springSecurityService.principal.id)
+		println  u.getUsername()
+		
+		//meetingInstance.participants.add(u)
+		respond meetingInstance
     }
 
 	@Secured(['ROLE_ADMIN'])
     def create() {
-        respond new Meeting(params)
+		
+		//Actual user
+		User u = User.get(springSecurityService.principal.id)
+		println  u.getUsername()
+		
+		Meeting m = new Meeting(params)
+		m.setCreator(u)
+		
+		println m
+		m.participants = new ArrayList<User>()
+		m.participants.add(u)
+		println m
+		
+        respond m
     }
 
     @Transactional
@@ -49,7 +72,20 @@ class MeetingController {
 
 	@Secured(['ROLE_ADMIN'])
     def edit(Meeting meetingInstance) {
-        respond meetingInstance
+		
+		//Actual user
+		User u = User.get(springSecurityService.principal.id)
+		println  u.getUsername()
+		
+		if(meetingInstance.getCreator() == u) {
+			a = meetingInstance.getParticipants()
+			println a
+			
+			respond meetingInstance
+		} else {
+			flash.message = message(code: 'You are not the creator of this meeting!')
+			redirect action: "index", method: "GET"
+		}
     }
 
     @Transactional
@@ -63,7 +99,7 @@ class MeetingController {
             respond meetingInstance.errors, view:'edit'
             return
         }
-
+		
         meetingInstance.save flush:true
 
         request.withFormat {
@@ -83,16 +119,25 @@ class MeetingController {
             notFound()
             return
         }
-
-        meetingInstance.delete flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Meeting.label', default: 'Meeting'), meetingInstance.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
+		
+		//Actual user
+		User u = User.get(springSecurityService.principal.id)
+		println  u.getUsername()
+		
+		if(meetingInstance.getCreator() == u) {
+			meetingInstance.delete flush:true
+			
+			request.withFormat {
+				form multipartForm {
+					flash.message = message(code: 'default.deleted.message', args: [message(code: 'Meeting.label', default: 'Meeting'), meetingInstance.id])
+					redirect action:"index", method:"GET"
+				}
+				'*'{ render status: NO_CONTENT }
+			}
+		} else {
+			flash.message = message(code: 'You are not the creator of this meeting!')
+			redirect action: "index", method: "GET"
+		}
     }
 
     protected void notFound() {

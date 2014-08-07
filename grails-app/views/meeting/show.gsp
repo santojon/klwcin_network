@@ -75,7 +75,7 @@
 						<g:each in="${meetingInstance.participants}" var="p">
 						<span class="property-value" aria-labelledby="participants-label"><g:link controller="user" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></span>
 						</g:each>
-					
+						
 				</li>
 				</g:if>
 			
