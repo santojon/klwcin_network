@@ -48,7 +48,7 @@ body {
 }
 
 #grailsLogo {
-	background-color: #700000;
+	background-color: #90342C;
 }
 
 /* replace with .no-boxshadow body if you have modernizr available */
@@ -65,7 +65,7 @@ body {
 }
 
 a:link, a:visited, a:hover {
-	color: #700000;
+	color: #90342C;
 }
 
 a:hover, a:active {
@@ -73,7 +73,7 @@ a:hover, a:active {
 }
 
 h1 {
-	color: #700000;
+	color: #90342C;
 	font-weight: normal;
 	font-size: 1.25em;
 	margin: 0.8em 0 0.3em 0;
@@ -108,7 +108,7 @@ img {
 }
 
 .footer {
-	background: #700000;
+	background: #90342C;
 	color: #000;
 	clear: both;
 	font-size: 0.8em;
@@ -118,7 +118,7 @@ img {
 }
 
 .footer a {
-	color: #700000;
+	color: #90342C;
 }
 
 .spinner {
@@ -283,7 +283,7 @@ input:focus, select:focus, textarea:focus {
 }
 
 .required-indicator {
-	color: #700000;
+	color: #90342C;
 	display: inline-block;
 	font-weight: bold;
 	margin-left: 0.3em;
@@ -430,7 +430,7 @@ th {
 	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ffffff), color-stop(1, #eaeaea));
 	    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr = '#ffffff', EndColorStr = '#eaeaea');
 	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#eaeaea')";
-	color: #700000;
+	color: #90342C;
 	font-weight: bold;
 	line-height: 1.7em;
 	padding: 0.2em 0.6em;
@@ -446,7 +446,7 @@ th a {
 }
 
 th a:link, th a:visited {
-	color: #700000;
+	color: #90342C;
 }
 
 th a:hover, th a:focus {
@@ -563,7 +563,7 @@ th:hover, tr:hover {
 .no-borderradius .buttons input:hover, .no-borderradius .buttons input:focus,
 .no-borderradius .buttons a:hover, .no-borderradius .buttons a:focus {
 	background-color: transparent;
-	color: #700000;
+	color: #90342C;
 	text-decoration: underline;
 }
 
