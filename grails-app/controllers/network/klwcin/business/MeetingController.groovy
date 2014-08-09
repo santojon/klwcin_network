@@ -6,7 +6,7 @@ import grails.transaction.Transactional
 import network.klwcin.security.User
 
 @Transactional(readOnly = true)
-@Secured(['ROLE_ADMIN', 'ROLE_USER'])
+@Secured(['ROLE_ADMIN', 'ROLE_USER', 'ROLE_NONE'])
 class MeetingController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -20,14 +20,12 @@ class MeetingController {
     }
 
     def show(Meeting meetingInstance) {
-		
-		//Actual user
-		User u = User.get(springSecurityService.principal.id)
-		println  u.getUsername()
-		
-		//meetingInstance.participants.add(u)
 		respond meetingInstance
     }
+	
+	def goToMeeting(Meeting meetingInstance) {	
+		respond meetingInstance
+	}
 
 	@Secured(['ROLE_ADMIN'])
     def create() {
@@ -78,9 +76,6 @@ class MeetingController {
 		println  u.getUsername()
 		
 		if(meetingInstance.getCreator() == u) {
-			a = meetingInstance.getParticipants()
-			println a
-			
 			respond meetingInstance
 		} else {
 			flash.message = message(code: 'You are not the creator of this meeting!')
@@ -100,6 +95,12 @@ class MeetingController {
             return
         }
 		
+		User u = User.get(springSecurityService.principal.id)
+		println  u.getUsername()
+		
+		meetingInstance.participants.add(u)
+		
+		println meetingInstance.participants.findAll()
         meetingInstance.save flush:true
 
         request.withFormat {

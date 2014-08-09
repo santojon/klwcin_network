@@ -83,6 +83,7 @@
 			<g:form url="[resource:meetingInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">
 					<g:link class="edit" action="edit" resource="${meetingInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+					<g:link class="save" action="goToMeeting" resource="${meetingInstance}"><g:message code="Participate" /></g:link>
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 				</fieldset>
 			</g:form>

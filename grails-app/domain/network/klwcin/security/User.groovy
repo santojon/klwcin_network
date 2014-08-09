@@ -1,4 +1,5 @@
 package network.klwcin.security
+import network.klwcin.business.Meeting
 
 class User {
 
@@ -15,6 +16,8 @@ class User {
 	boolean accountExpired
 	boolean accountLocked
 	boolean passwordExpired
+	
+	//static belongsTo = [meetings: Meeting]
 
 	static transients = ['springSecurityService']
 
@@ -25,6 +28,8 @@ class User {
 		
 		username blank: false, unique: true
 		password blank: false, password:true
+		
+		//meetings blank: true
 	}
 	
 	String toString() {

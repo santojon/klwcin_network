@@ -82,4 +82,3 @@
 	<g:checkBox name="passwordExpired" value="${userInstance?.passwordExpired}" />
 
 </div>
-
