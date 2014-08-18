@@ -6,7 +6,7 @@ import grails.transaction.Transactional
 import network.klwcin.security.User
 
 @Transactional(readOnly = true)
-@Secured(['ROLE_ADMIN', 'ROLE_USER'])
+@Secured(['ROLE_ADMIN', 'ROLE_USER', 'ROLE_NONE'])
 class MeetingController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -20,14 +20,17 @@ class MeetingController {
     }
 
     def show(Meeting meetingInstance) {
+		respond meetingInstance
+    }
+	
+	def goToMeeting(Meeting meetingInstance) {
 		
-		//Actual user
 		User u = User.get(springSecurityService.principal.id)
 		println  u.getUsername()
 		
-		//meetingInstance.participants.add(u)
+		meetingInstance.participants.add(u)
 		respond meetingInstance
-    }
+	}
 
 	@Secured(['ROLE_ADMIN'])
     def create() {
@@ -78,9 +81,6 @@ class MeetingController {
 		println  u.getUsername()
 		
 		if(meetingInstance.getCreator() == u) {
-			a = meetingInstance.getParticipants()
-			println a
-			
 			respond meetingInstance
 		} else {
 			flash.message = message(code: 'You are not the creator of this meeting!')
@@ -100,15 +100,41 @@ class MeetingController {
             return
         }
 		
-        meetingInstance.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Meeting.label', default: 'Meeting'), meetingInstance.id])
-                redirect meetingInstance
-            }
-            '*'{ respond meetingInstance, [status: OK] }
-        }
+		User u = User.get(springSecurityService.principal.id)
+		println  u.getUsername()
+		
+		if(meetingInstance.getType() == 'Council') {
+			if(!u.getType().equals('Counselor')) {
+				flash.message = message(code: 'You are not a Councelor!')
+				redirect meetingInstance
+			} else {
+				meetingInstance.participants.add(u)
+			
+				println meetingInstance.participants.findAll()
+				meetingInstance.save flush:true
+							
+				request.withFormat {
+					form multipartForm {
+						flash.message = message(code: 'default.updated.message', args: [message(code: 'Meeting.label', default: 'Meeting'), meetingInstance.id])
+						redirect meetingInstance
+					}
+					'*'{ respond meetingInstance, [status: OK] }
+				}
+			}
+		} else {
+			meetingInstance.participants.add(u)
+				
+			println meetingInstance.participants.findAll()
+			meetingInstance.save flush:true
+			
+			request.withFormat {
+				form multipartForm {
+					flash.message = message(code: 'default.updated.message', args: [message(code: 'Meeting.label', default: 'Meeting'), meetingInstance.id])
+					redirect meetingInstance
+				}
+				'*'{ respond meetingInstance, [status: OK] }
+			}
+		}
     }
 
     @Transactional

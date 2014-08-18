@@ -80,69 +80,77 @@ printHtmlPart(21)
 invokeTag('fieldValue','g',48,['bean':(userInstance),'field':("type")],-1)
 printHtmlPart(16)
 }
+printHtmlPart(22)
+if(true && (userInstance?.phone)) {
+printHtmlPart(14)
+invokeTag('message','g',55,['code':("user.phone.label"),'default':("Phone")],-1)
+printHtmlPart(15)
+invokeTag('fieldValue','g',57,['bean':(userInstance),'field':("phone")],-1)
+printHtmlPart(16)
+}
 printHtmlPart(17)
 if(true && (userInstance?.username)) {
-printHtmlPart(22)
-invokeTag('message','g',55,['code':("user.username.label"),'default':("Username")],-1)
 printHtmlPart(23)
-invokeTag('fieldValue','g',57,['bean':(userInstance),'field':("username")],-1)
+invokeTag('message','g',64,['code':("user.username.label"),'default':("Username")],-1)
+printHtmlPart(24)
+invokeTag('fieldValue','g',66,['bean':(userInstance),'field':("username")],-1)
 printHtmlPart(16)
 }
 printHtmlPart(17)
 if(true && (userInstance?.accountExpired)) {
-printHtmlPart(24)
-invokeTag('message','g',64,['code':("user.accountExpired.label"),'default':("Account Expired")],-1)
 printHtmlPart(25)
-invokeTag('formatBoolean','g',66,['boolean':(userInstance?.accountExpired)],-1)
+invokeTag('message','g',73,['code':("user.accountExpired.label"),'default':("Account Expired")],-1)
+printHtmlPart(26)
+invokeTag('formatBoolean','g',75,['boolean':(userInstance?.accountExpired)],-1)
 printHtmlPart(16)
 }
 printHtmlPart(17)
 if(true && (userInstance?.accountLocked)) {
-printHtmlPart(26)
-invokeTag('message','g',73,['code':("user.accountLocked.label"),'default':("Account Locked")],-1)
 printHtmlPart(27)
-invokeTag('formatBoolean','g',75,['boolean':(userInstance?.accountLocked)],-1)
+invokeTag('message','g',82,['code':("user.accountLocked.label"),'default':("Account Locked")],-1)
+printHtmlPart(28)
+invokeTag('formatBoolean','g',84,['boolean':(userInstance?.accountLocked)],-1)
 printHtmlPart(16)
 }
 printHtmlPart(17)
 if(true && (userInstance?.enabled)) {
-printHtmlPart(28)
-invokeTag('message','g',82,['code':("user.enabled.label"),'default':("Enabled")],-1)
 printHtmlPart(29)
-invokeTag('formatBoolean','g',84,['boolean':(userInstance?.enabled)],-1)
+invokeTag('message','g',91,['code':("user.enabled.label"),'default':("Enabled")],-1)
+printHtmlPart(30)
+invokeTag('formatBoolean','g',93,['boolean':(userInstance?.enabled)],-1)
 printHtmlPart(16)
 }
 printHtmlPart(17)
 if(true && (userInstance?.passwordExpired)) {
-printHtmlPart(30)
-invokeTag('message','g',91,['code':("user.passwordExpired.label"),'default':("Password Expired")],-1)
 printHtmlPart(31)
-invokeTag('formatBoolean','g',93,['boolean':(userInstance?.passwordExpired)],-1)
+invokeTag('message','g',100,['code':("user.passwordExpired.label"),'default':("Password Expired")],-1)
+printHtmlPart(32)
+invokeTag('formatBoolean','g',102,['boolean':(userInstance?.passwordExpired)],-1)
 printHtmlPart(16)
 }
-printHtmlPart(32)
-createTagBody(2, {->
 printHtmlPart(33)
-createTagBody(3, {->
-invokeTag('message','g',101,['code':("default.button.edit.label"),'default':("Edit")],-1)
-})
-invokeTag('link','g',101,['class':("edit"),'action':("edit"),'resource':(userInstance)],3)
+createTagBody(2, {->
 printHtmlPart(34)
-invokeTag('actionSubmit','g',102,['class':("delete"),'action':("delete"),'value':(message(code: 'default.button.delete.label', default: 'Delete')),'onclick':("return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');")],-1)
-printHtmlPart(35)
+createTagBody(3, {->
+invokeTag('message','g',110,['code':("default.button.edit.label"),'default':("Edit")],-1)
 })
-invokeTag('form','g',104,['url':([resource:userInstance, action:'delete']),'method':("DELETE")],2)
+invokeTag('link','g',110,['class':("edit"),'action':("edit"),'resource':(userInstance)],3)
+printHtmlPart(35)
+invokeTag('actionSubmit','g',111,['class':("delete"),'action':("delete"),'value':(message(code: 'default.button.delete.label', default: 'Delete')),'onclick':("return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');")],-1)
 printHtmlPart(36)
 })
-invokeTag('captureBody','sitemesh',106,[:],1)
+invokeTag('form','g',113,['url':([resource:userInstance, action:'delete']),'method':("DELETE")],2)
 printHtmlPart(37)
+})
+invokeTag('captureBody','sitemesh',115,[:],1)
+printHtmlPart(38)
 }
 public static final Map JSP_TAGS = new HashMap()
 protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1407282087845L
+public static final long LAST_MODIFIED = 1408224114951L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'

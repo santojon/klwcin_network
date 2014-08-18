@@ -16,7 +16,7 @@ class Meeting {
 		place(size: 2..45)
 		description(size: 10..100)
 		type(inList: ["Ascension", "Common", "Council", "Special"])
-		date(validator: {return (it > new Date())})
+		date(/**validator: {return (it > new Date())}**/)
     }
 	
 	String toString() {

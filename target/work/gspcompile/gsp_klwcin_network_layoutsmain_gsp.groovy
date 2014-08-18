@@ -45,32 +45,34 @@ invokeTag('captureHead','sitemesh',18,[:],1)
 printHtmlPart(6)
 createTagBody(1, {->
 printHtmlPart(7)
-invokeTag('image','asset',21,['src':("Icon.png"),'alt':("KLWCIn logo")],-1)
+invokeTag('image','asset',21,['src':("logo_full.png"),'alt':("KLWCIn logo")],-1)
 printHtmlPart(8)
 expressionOut.print(createLink(uri: '/j_spring_security_logout'))
 printHtmlPart(9)
-expressionOut.print(createLink(uri: '/user'))
+expressionOut.print(createLink(uri: '/'))
 printHtmlPart(10)
-expressionOut.print(createLink(uri: '/meeting'))
+expressionOut.print(createLink(uri: '/user'))
 printHtmlPart(11)
-expressionOut.print(createLink(uri: '/login/auth'))
+expressionOut.print(createLink(uri: '/meeting'))
 printHtmlPart(12)
 expressionOut.print(createLink(uri: '/j_spring_security_logout'))
 printHtmlPart(13)
-invokeTag('layoutBody','g',31,[:],-1)
+expressionOut.print(createLink(uri: '/login/auth'))
 printHtmlPart(14)
-invokeTag('message','g',33,['code':("spinner.alt"),'default':("Loading&hellip;")],-1)
+invokeTag('layoutBody','g',32,[:],-1)
 printHtmlPart(15)
-})
-invokeTag('captureBody','sitemesh',34,[:],1)
+invokeTag('message','g',34,['code':("spinner.alt"),'default':("Loading&hellip;")],-1)
 printHtmlPart(16)
+})
+invokeTag('captureBody','sitemesh',35,[:],1)
+printHtmlPart(17)
 }
 public static final Map JSP_TAGS = new HashMap()
 protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1407319494930L
+public static final long LAST_MODIFIED = 1408200641808L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'

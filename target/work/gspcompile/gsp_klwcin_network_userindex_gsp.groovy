@@ -57,46 +57,50 @@ printHtmlPart(13)
 invokeTag('sortableColumn','g',29,['property':("email"),'title':(message(code: 'user.email.label', default: 'Email'))],-1)
 printHtmlPart(13)
 invokeTag('sortableColumn','g',31,['property':("type"),'title':(message(code: 'user.type.label', default: 'Type'))],-1)
-printHtmlPart(13)
-invokeTag('sortableColumn','g',33,['property':("username"),'title':(message(code: 'user.username.label', default: 'Username'))],-1)
-printHtmlPart(13)
-invokeTag('sortableColumn','g',35,['property':("accountExpired"),'title':(message(code: 'user.accountExpired.label', default: 'Account Expired'))],-1)
 printHtmlPart(14)
+invokeTag('sortableColumn','g',33,['property':("phone"),'title':(message(code: 'user.phone.label', default: 'Phone'))],-1)
+printHtmlPart(13)
+invokeTag('sortableColumn','g',35,['property':("username"),'title':(message(code: 'user.username.label', default: 'Username'))],-1)
+printHtmlPart(13)
+invokeTag('sortableColumn','g',37,['property':("accountExpired"),'title':(message(code: 'user.accountExpired.label', default: 'Account Expired'))],-1)
+printHtmlPart(15)
 loop:{
 int i = 0
 for( userInstance in (userInstanceList) ) {
-printHtmlPart(15)
-expressionOut.print((i % 2) == 0 ? 'even' : 'odd')
 printHtmlPart(16)
+expressionOut.print((i % 2) == 0 ? 'even' : 'odd')
+printHtmlPart(17)
 createTagBody(3, {->
 expressionOut.print(fieldValue(bean: userInstance, field: "name"))
 })
-invokeTag('link','g',43,['action':("show"),'id':(userInstance.id)],3)
-printHtmlPart(17)
-expressionOut.print(fieldValue(bean: userInstance, field: "email"))
-printHtmlPart(17)
-expressionOut.print(fieldValue(bean: userInstance, field: "type"))
-printHtmlPart(17)
-expressionOut.print(fieldValue(bean: userInstance, field: "username"))
-printHtmlPart(17)
-invokeTag('formatBoolean','g',51,['boolean':(userInstance.accountExpired)],-1)
+invokeTag('link','g',45,['action':("show"),'id':(userInstance.id)],3)
 printHtmlPart(18)
+expressionOut.print(fieldValue(bean: userInstance, field: "email"))
+printHtmlPart(18)
+expressionOut.print(fieldValue(bean: userInstance, field: "type"))
+printHtmlPart(19)
+expressionOut.print(fieldValue(bean: userInstance, field: "phone"))
+printHtmlPart(18)
+expressionOut.print(fieldValue(bean: userInstance, field: "username"))
+printHtmlPart(18)
+invokeTag('formatBoolean','g',55,['boolean':(userInstance.accountExpired)],-1)
+printHtmlPart(20)
 i++
 }
 }
-printHtmlPart(19)
-invokeTag('paginate','g',58,['total':(userInstanceCount ?: 0)],-1)
-printHtmlPart(20)
-})
-invokeTag('captureBody','sitemesh',61,[:],1)
 printHtmlPart(21)
+invokeTag('paginate','g',62,['total':(userInstanceCount ?: 0)],-1)
+printHtmlPart(22)
+})
+invokeTag('captureBody','sitemesh',65,[:],1)
+printHtmlPart(23)
 }
 public static final Map JSP_TAGS = new HashMap()
 protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1407282088095L
+public static final long LAST_MODIFIED = 1408224208625L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'

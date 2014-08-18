@@ -23,7 +23,7 @@ expressionOut.print(hasErrors(bean: meetingInstance, field: 'description', 'erro
 printHtmlPart(4)
 invokeTag('message','g',16,['code':("meeting.description.label"),'default':("Description")],-1)
 printHtmlPart(2)
-invokeTag('textField','g',19,['name':("description"),'maxlength':("100"),'required':(""),'value':(meetingInstance?.description)],-1)
+invokeTag('textArea','g',19,['name':("description"),'maxlength':("100"),'required':(""),'value':(meetingInstance?.description)],-1)
 printHtmlPart(3)
 expressionOut.print(hasErrors(bean: meetingInstance, field: 'type', 'error'))
 printHtmlPart(5)
@@ -55,7 +55,7 @@ protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1407298981783L
+public static final long LAST_MODIFIED = 1408240394576L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'
