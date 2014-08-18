@@ -49,6 +49,15 @@
 					
 				</li>
 				</g:if>
+				
+				<g:if test="${userInstance?.phone}">
+				<li class="fieldcontain">
+					<span id="name-label" class="property-label"><g:message code="user.phone.label" default="Phone" /></span>
+					
+						<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${userInstance}" field="phone"/></span>
+					
+				</li>
+				</g:if>
 			
 				<g:if test="${userInstance?.username}">
 				<li class="fieldcontain">
@@ -95,17 +104,6 @@
 				</li>
 				</g:if>
 				
-				<!-- <g:if test="${userInstance?.meetings}">
-					<li class="fieldcontain">
-						<span id="participants-label" class="property-label"><g:message code="Meetings" /></span>
-									
-						<g:each in="${userInstance.meetings}" var="p">
-							<span class="property-value" aria-labelledby="participants-label"><g:link controller="user" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></span>
-						</g:each>
-										
-					</li>
-				</g:if> -->
-			
 			</ol>
 			<g:form url="[resource:userInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">

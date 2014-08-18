@@ -1,8 +1,33 @@
 <html>
 <head>
-	<meta name='layout' content='main'/>
 	<title><g:message code="springSecurity.login.title"/></title>
 	<style type='text/css' media='screen'>
+	html {
+	background-color: #ddd;
+	background-image: -moz-linear-gradient(center top, #aaa, #ddd);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #aaa), color-stop(1, #ddd));
+	background-image: linear-gradient(top, #aaa, #ddd);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr = '#aaaaaa', EndColorStr = '#dddddd');
+	background-repeat: no-repeat;
+	height: 100%;
+	/* change the box model to exclude the padding from the calculation of 100% height (IE8+) */
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
+	}
+	
+	html.no-cssgradients {
+	background-color: #aaa;
+	}
+	
+	.ie6 html {
+		height: 100%;
+	}
+	
+	html * {
+		margin: 0;
+	}
+	
 	#login {
 		margin: 15px 0px;
 		padding: 0px;
@@ -14,8 +39,10 @@
 		padding-bottom: 6px;
 		margin: 60px auto;
 		text-align: left;
+		color: #ffffff;
+		background-color: #90342C;
 		border: 1px solid #aab;
-		background-color: #f0f0fa;
+		background-color: #90342C;
 		-moz-box-shadow: 2px 2px 2px #eee;
 		-webkit-box-shadow: 2px 2px 2px #eee;
 		-khtml-box-shadow: 2px 2px 2px #eee;
@@ -24,11 +51,17 @@
 
 	#login .inner .fheader {
 		padding: 18px 26px 14px 26px;
-		background-color: #f7f7ff;
+		background-color: #90342C;
 		margin: 0px 0 14px 0;
-		color: #2e3741;
+		color: #ffffff;
 		font-size: 18px;
 		font-weight: bold;
+		text-align: center;
+	}
+	
+	#login .inner .logo {
+		background-color: #90342C;
+		text-align: center;
 	}
 
 	#login .inner .cssform p {
@@ -81,16 +114,27 @@
 	#login .inner .chk {
 		height: 12px;
 	}
+	
+	.login_message_w {
+		color: #ffffff;
+		margin-left: 15px;
+		padding: 6px 25px 20px 25px;
+	}
 	</style>
 </head>
 
 <body>
 <div id='login'>
 	<div class='inner'>
-		<div class='fheader'><g:message code="springSecurity.login.header"/></div>
+		<div class='logo'>
+			<asset:image src="icon.png" alt="KLWCIn logo"/>
+		</div>
+		<div class='fheader'>
+			<g:message code="springSecurity.login.header"/>
+		</div>
 
 		<g:if test='${flash.message}'>
-			<div class='login_message'>${flash.message}</div>
+			<div class='login_message_w'>${flash.message}</div>
 		</g:if>
 
 		<form action='${postUrl}' method='POST' id='loginForm' class='cssform' autocomplete='off'>

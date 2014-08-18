@@ -8,6 +8,7 @@ class User {
 	String name
 	String email
 	String type
+	String phone
 	
 	String username
 	String password
@@ -25,6 +26,7 @@ class User {
 		name(size: 2..45)
 		email(email: true)
 		type(inList: ["Aspirant", "Common", "Counselor"])
+		phone nullable: true
 		
 		username blank: false, unique: true
 		password blank: false, password:true

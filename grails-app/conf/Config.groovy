@@ -118,66 +118,14 @@ log4j.main = {
            'net.sf.ehcache.hibernate'
 }
 
-
-// Added by the Spring Security Core plugin:
-grails.plugin.springsecurity.userLookup.userDomainClassName = 'network.klwcin.security.Member'
-grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'network.klwcin.security.MemberRole'
-grails.plugin.springsecurity.authority.className = 'network.klwcin.security.Role'
-grails.plugin.springsecurity.controllerAnnotations.staticRules = [
-	'/':                              ['permitAll'],
-	'/index':                         ['permitAll'],
-	'/index.gsp':                     ['permitAll'],
-	'/assets/**':                     ['permitAll'],
-	'/**/js/**':                      ['permitAll'],
-	'/**/css/**':                     ['permitAll'],
-	'/**/images/**':                  ['permitAll'],
-	'/**/favicon.ico':                ['permitAll']
-]
-
-
-
-// Added by the Spring Security Core plugin:
-grails.plugin.springsecurity.userLookup.userDomainClassName = 'network.klwcin.security.Member'
-grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'network.klwcin.security.MemberRole'
-grails.plugin.springsecurity.authority.className = 'network.klwcin.security.Role'
-grails.plugin.springsecurity.controllerAnnotations.staticRules = [
-	'/':                              ['permitAll'],
-	'/index':                         ['permitAll'],
-	'/index.gsp':                     ['permitAll'],
-	'/assets/**':                     ['permitAll'],
-	'/**/js/**':                      ['permitAll'],
-	'/**/css/**':                     ['permitAll'],
-	'/**/images/**':                  ['permitAll'],
-	'/**/favicon.ico':                ['permitAll']
-]
-
-
-
 // Added by the Spring Security Core plugin:
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'network.klwcin.security.User'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'network.klwcin.security.UserRole'
 grails.plugin.springsecurity.authority.className = 'network.klwcin.security.Role'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
-	'/':                              ['permitAll'],
-	'/index':                         ['permitAll'],
-	'/index.gsp':                     ['permitAll'],
-	'/assets/**':                     ['permitAll'],
-	'/**/js/**':                      ['permitAll'],
-	'/**/css/**':                     ['permitAll'],
-	'/**/images/**':                  ['permitAll'],
-	'/**/favicon.ico':                ['permitAll']
-]
-
-
-
-// Added by the Spring Security Core plugin:
-grails.plugin.springsecurity.userLookup.userDomainClassName = 'network.klwcin.security.User'
-grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'network.klwcin.security.UserRole'
-grails.plugin.springsecurity.authority.className = 'network.klwcin.security.Role'
-grails.plugin.springsecurity.controllerAnnotations.staticRules = [
-	'/':                              ['permitAll'],
-	'/index':                         ['permitAll'],
-	'/index.gsp':                     ['permitAll'],
+	'/':                              ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_NONE'],
+	'/index':                         ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_NONE'],
+	'/index.gsp':                     ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_NONE'],
 	'/assets/**':                     ['permitAll'],
 	'/**/js/**':                      ['permitAll'],
 	'/**/css/**':                     ['permitAll'],

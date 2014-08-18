@@ -23,7 +23,12 @@ class MeetingController {
 		respond meetingInstance
     }
 	
-	def goToMeeting(Meeting meetingInstance) {	
+	def goToMeeting(Meeting meetingInstance) {
+		
+		User u = User.get(springSecurityService.principal.id)
+		println  u.getUsername()
+		
+		meetingInstance.participants.add(u)
 		respond meetingInstance
 	}
 
@@ -98,18 +103,38 @@ class MeetingController {
 		User u = User.get(springSecurityService.principal.id)
 		println  u.getUsername()
 		
-		meetingInstance.participants.add(u)
-		
-		println meetingInstance.participants.findAll()
-        meetingInstance.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Meeting.label', default: 'Meeting'), meetingInstance.id])
-                redirect meetingInstance
-            }
-            '*'{ respond meetingInstance, [status: OK] }
-        }
+		if(meetingInstance.getType() == 'Council') {
+			if(!u.getType().equals('Counselor')) {
+				flash.message = message(code: 'You are not a Councelor!')
+				redirect meetingInstance
+			} else {
+				meetingInstance.participants.add(u)
+			
+				println meetingInstance.participants.findAll()
+				meetingInstance.save flush:true
+							
+				request.withFormat {
+					form multipartForm {
+						flash.message = message(code: 'default.updated.message', args: [message(code: 'Meeting.label', default: 'Meeting'), meetingInstance.id])
+						redirect meetingInstance
+					}
+					'*'{ respond meetingInstance, [status: OK] }
+				}
+			}
+		} else {
+			meetingInstance.participants.add(u)
+				
+			println meetingInstance.participants.findAll()
+			meetingInstance.save flush:true
+			
+			request.withFormat {
+				form multipartForm {
+					flash.message = message(code: 'default.updated.message', args: [message(code: 'Meeting.label', default: 'Meeting'), meetingInstance.id])
+					redirect meetingInstance
+				}
+				'*'{ respond meetingInstance, [status: OK] }
+			}
+		}
     }
 
     @Transactional

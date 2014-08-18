@@ -29,6 +29,14 @@
 
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'phone', 'error')}">
+	<label for="phone">
+		<g:message code="user.phone.label" default="Phone" />
+	</label>
+	<g:textField name="phone" maxlength="16" value="${userInstance?.phone}"/>
+
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'username', 'error')} required">
 	<label for="username">
 		<g:message code="user.username.label" default="Username" />

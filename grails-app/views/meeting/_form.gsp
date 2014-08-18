@@ -16,7 +16,7 @@
 		<g:message code="meeting.description.label" default="Description" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="description" maxlength="100" required="" value="${meetingInstance?.description}"/>
+	<g:textArea name="description" maxlength="100" required="" value="${meetingInstance?.description}"/>
 
 </div>
 

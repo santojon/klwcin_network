@@ -21,10 +21,11 @@
 			<a href="http://www.cin.ufpe.br/~jgs/klwcin.html"><asset:image src="logo_full.png" alt="KLWCIn logo"/>KLWCIn Network</a>
 			<div class="nav" role="navigation">
 				<form action="${createLink(uri: '/j_spring_security_logout')}">
+					<button formaction="${createLink(uri: '/')}">Home</button>
 					<button formaction="${createLink(uri: '/user')}">Manage Users</button>
 					<button formaction="${createLink(uri: '/meeting')}">Manage Meetings</button>
 					<button formaction="${createLink(uri: '/j_spring_security_logout')}" style="float: right;">Logout</button>
-					<button formaction="${createLink(uri: '/login/auth')}" style="float: right;">Login</button>
+					<!-- <button formaction="${createLink(uri: '/login/auth')}" style="float: right;">Login</button> -->
 				</form>
 			</div>
 		</div>
