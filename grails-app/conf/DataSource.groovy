@@ -1,4 +1,4 @@
-/**dataSource {
+dataSource {
     pooled = true
     jmxExport = true
     driverClassName = "org.h2.Driver"
@@ -53,7 +53,7 @@ environments {
             }
         }
     }
-}**/
+}
 
 /**dataSource {
     pooled = true
@@ -119,7 +119,7 @@ environments {
     }
 }**/
 
-dataSource {
+/**dataSource {
 	pooled = true
 	jmxExport = true
 	driverClassName = "com.mysql.jdbc.Driver"
@@ -155,30 +155,22 @@ environments {
 	}
 	production {
 		dataSource {
+			username = "root"
+			password = "rootroot"
+			pooled = true
 			dbCreate = "update"
-			url = "jdbc:mysql://localhost:3307/klwcin_network_dev?autoreconnect=true"
-						username = "root"
-						password = "root"
+			driverClassName = "com.mysql.jdbc.Driver"
+			url = "jdbc:mysql://klwcinnetwork.cgyjfah0gpwz.sa-east-1.rds.amazonaws.com:3306/ebdb?user=root&password=rootroot"
+			dialect = org.hibernate.dialect.MySQL5InnoDBDialect
 			properties {
-			   // See http://grails.org/doc/latest/guide/conf.html#dataSource for documentation
-			   jmxEnabled = true
-			   initialSize = 5
-			   maxActive = 50
-			   minIdle = 5
-			   maxIdle = 25
-			   maxWait = 10000
-			   maxAge = 10 * 60000
-			   timeBetweenEvictionRunsMillis = 5000
-			   minEvictableIdleTimeMillis = 60000
-			   validationQuery = "SELECT 1"
-			   validationQueryTimeout = 3
-			   validationInterval = 15000
-			   testOnBorrow = true
-			   testWhileIdle = true
-			   testOnReturn = false
-			   jdbcInterceptors = "ConnectionState"
-			   defaultTransactionIsolation = java.sql.Connection.TRANSACTION_READ_COMMITTED
+				validationQuery = "SELECT 1"
+				testOnBorrow = true
+				testOnReturn = true
+				testWhileIdle = true
+				timeBetweenEvictionRunsMillis = 1800000
+				numTestsPerEvictionRun = 3
+				minEvictableIdleTimeMillis = 1800000
 			}
 		}
 	}
-}
+}**/

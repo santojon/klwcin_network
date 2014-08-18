@@ -127,7 +127,7 @@
 <div id='login'>
 	<div class='inner'>
 		<div class='logo'>
-			<asset:image src="icon.png" alt="KLWCIn logo"/>
+			<!-- <asset:image src="icon.png" alt="KLWCIn logo"/> -->
 		</div>
 		<div class='fheader'>
 			<g:message code="springSecurity.login.header"/>
