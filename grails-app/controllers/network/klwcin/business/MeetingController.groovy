@@ -95,7 +95,6 @@ class MeetingController {
 			} else {
 				meetingInstance.participants.add(springSecurityService.currentUser)
 			
-				println meetingInstance.participants.findAll()
 				meetingInstance.save flush:true
 							
 				request.withFormat {
@@ -109,7 +108,6 @@ class MeetingController {
 		} else {
 			meetingInstance.participants.add(springSecurityService.currentUser)
 				
-			println meetingInstance.participants.findAll()
 			meetingInstance.save flush:true
 			
 			request.withFormat {

@@ -52,12 +52,5 @@ class DatabaseService {
 		UserRole.create userUser2, userRole, true
 		
 		UserRole.create noneUser, noneRole, true
-		
-		//tests
-		println User.count()
-		println Role.count()
-		println UserRole.count()
-		
-		println UserRole.findAll {}
     }
 }

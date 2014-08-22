@@ -18,7 +18,7 @@ class Meeting {
 		type(inList: ["Common", "Ascension", "Special", "Council"])
 		
 		//UTC - 3 validation (hell server!)
-		date(validator: {return (it > new Date(hours: (new Date()).hours -= 3))})
+		date(validator: {return (it > new Date(hours: (new Date()).hours -= 3))}, unique: true)
     }
 	
 	String toString() {

@@ -11,9 +11,9 @@ class IndexController {
 
     def index() {
 		
-		ArrayList<Meeting> m = []
+		def m = []
 		if(springSecurityService.currentUser.getType().equals('Counselor')) {
-			m = Meeting.findAll("from Meeting as m where m.date > :date order by m.date", [date: new Date(hours: (new Date()).hours -= 3)], [max: 10])
+			m = Meeting.findAll("from Meeting as m where m.date > :date order by m.date", [date: new Date(hours: (new Date()).hours -= 3)], [max: 15])
 		} else {
 			m = Meeting.findAll("from Meeting as m where m.date > :date and m.type != :council order by m.date", [date: new Date(hours: (new Date()).hours -= 3), council: 'Council'], [max: 10])
 		}
@@ -23,7 +23,6 @@ class IndexController {
 	}
 	
 	def showMeeting(Meeting meeting) {
-		println meeting.id
 		render(view: '/meeting/show', model: [meetingInstance: meeting])
 		//redirect(controller:"Meeting",action:"show") 		// -- não funfa com parâmetros
 	}
