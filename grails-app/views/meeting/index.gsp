@@ -46,7 +46,7 @@
 					
 						<td>${fieldValue(bean: meetingInstance, field: "type")}</td>
 					
-						<td><g:formatDate date="${meetingInstance.date}" /></td>
+						<td><g:formatDate format="dd/MM/yy - HH:mm" date="${meetingInstance.date}" /></td>
 					
 						<td>${fieldValue(bean: meetingInstance, field: "creator")}</td>
 					

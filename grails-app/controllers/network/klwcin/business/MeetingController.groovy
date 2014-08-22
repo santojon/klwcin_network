@@ -11,8 +11,6 @@ class MeetingController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 	def springSecurityService
-	ArrayList<User> a = new ArrayList<User>()
-	//boolean participate = false
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -24,28 +22,22 @@ class MeetingController {
     }
 	
 	def goToMeeting(Meeting meetingInstance) {
-		
-		User u = User.get(springSecurityService.principal.id)
-		println  u.getUsername()
-		
-		meetingInstance.participants.add(u)
+		meetingInstance.participants.add(springSecurityService.currentUser)
 		respond meetingInstance
 	}
 
 	@Secured(['ROLE_ADMIN'])
     def create() {
 		
-		//Actual user
-		User u = User.get(springSecurityService.principal.id)
-		println  u.getUsername()
-		
 		Meeting m = new Meeting(params)
-		m.setCreator(u)
+		m.setCreator(springSecurityService.currentUser)
 		
-		println m
-		m.participants = new ArrayList<User>()
-		m.participants.add(u)
-		println m
+		m.participants = []
+		m.participants.add(springSecurityService.currentUser)
+		
+		//the server is UTC (GMT)
+		m.date = new Date()
+		m.date.hours -= 3
 		
         respond m
     }
@@ -62,7 +54,7 @@ class MeetingController {
             return
         }
 
-        meetingInstance.save flush:true
+		meetingInstance.save flush:true
 
         request.withFormat {
             form multipartForm {
@@ -76,11 +68,7 @@ class MeetingController {
 	@Secured(['ROLE_ADMIN'])
     def edit(Meeting meetingInstance) {
 		
-		//Actual user
-		User u = User.get(springSecurityService.principal.id)
-		println  u.getUsername()
-		
-		if(meetingInstance.getCreator() == u) {
+		if(meetingInstance.getCreator() == springSecurityService.currentUser) {
 			respond meetingInstance
 		} else {
 			flash.message = message(code: 'You are not the creator of this meeting!')
@@ -100,15 +88,12 @@ class MeetingController {
             return
         }
 		
-		User u = User.get(springSecurityService.principal.id)
-		println  u.getUsername()
-		
 		if(meetingInstance.getType() == 'Council') {
-			if(!u.getType().equals('Counselor')) {
+			if(!springSecurityService.currentUser.getType().equals('Counselor')) {
 				flash.message = message(code: 'You are not a Councelor!')
 				redirect meetingInstance
 			} else {
-				meetingInstance.participants.add(u)
+				meetingInstance.participants.add(springSecurityService.currentUser)
 			
 				println meetingInstance.participants.findAll()
 				meetingInstance.save flush:true
@@ -122,7 +107,7 @@ class MeetingController {
 				}
 			}
 		} else {
-			meetingInstance.participants.add(u)
+			meetingInstance.participants.add(springSecurityService.currentUser)
 				
 			println meetingInstance.participants.findAll()
 			meetingInstance.save flush:true
@@ -146,11 +131,7 @@ class MeetingController {
             return
         }
 		
-		//Actual user
-		User u = User.get(springSecurityService.principal.id)
-		println  u.getUsername()
-		
-		if(meetingInstance.getCreator() == u) {
+		if(meetingInstance.getCreator() == springSecurityService.currentUser) {
 			meetingInstance.delete flush:true
 			
 			request.withFormat {

@@ -15,8 +15,10 @@ class Meeting {
     static constraints = {
 		place(size: 2..45)
 		description(size: 10..100)
-		type(inList: ["Ascension", "Common", "Council", "Special"])
-		date(/**validator: {return (it > new Date())}**/)
+		type(inList: ["Common", "Ascension", "Special", "Council"])
+		
+		//UTC - 3 validation (hell server!)
+		date(validator: {return (it > new Date(hours: (new Date()).hours -= 3))})
     }
 	
 	String toString() {

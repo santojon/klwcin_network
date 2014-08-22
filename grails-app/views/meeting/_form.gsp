@@ -38,7 +38,7 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: meetingInstance, field: 'creator', 'error')} required">
+<div hidden="true" class="fieldcontain ${hasErrors(bean: meetingInstance, field: 'creator', 'error')} required">
 	<label for="creator">
 		<g:message code="meeting.creator.label" default="Creator" />
 		<span class="required-indicator">*</span>
@@ -47,7 +47,7 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: meetingInstance, field: 'participants', 'error')} requierd">
+<div hidden="true" class="fieldcontain ${hasErrors(bean: meetingInstance, field: 'participants', 'error')} requierd">
 	<label for="participants">
 		<g:message code="meeting.participants.label" default="Participants" />
 		

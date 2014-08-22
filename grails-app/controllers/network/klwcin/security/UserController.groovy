@@ -5,7 +5,7 @@ import grails.plugin.springsecurity.annotation.Secured;
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
-@Secured(['ROLE_ADMIN'])
+@Secured(['ROLE_ADMIN', 'ROLE_USER', 'ROLE_NONE'])
 class UserController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -20,6 +20,7 @@ class UserController {
         respond userInstance
     }
 
+	@Secured(['ROLE_ADMIN'])
     def create() {
         respond new User(params)
     }
@@ -61,7 +62,16 @@ class UserController {
     }
 
     def edit(User userInstance) {
-        respond userInstance
+		if(springSecurityService.currentUser.getType() == "Counselor") {
+			respond userInstance
+		} else {
+			if(springSecurityService.currentUser == userInstance) {
+				respond userInstance
+			} else {
+				flash.message = message(code: 'You cannot modify this account!')
+				redirect action: "index", method: "GET"
+			}
+		}
     }
 
     @Transactional
@@ -88,6 +98,7 @@ class UserController {
     }
 
     @Transactional
+	@Secured(['ROLE_ADMIN'])
     def delete(User userInstance) {
 
         if (userInstance == null) {

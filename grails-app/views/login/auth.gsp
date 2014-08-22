@@ -127,6 +127,7 @@
 <div id='login'>
 	<div class='inner'>
 		<div class='logo'>
+			<img src="/klwcin_network/assets/icon.png">
 			<!-- <asset:image src="icon.png" alt="KLWCIn logo"/> -->
 		</div>
 		<div class='fheader'>

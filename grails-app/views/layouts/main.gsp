@@ -1,3 +1,4 @@
+<%@ page import="network.klwcin.security.User" %>
 <!DOCTYPE html>
 <!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
 <!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
@@ -20,13 +21,17 @@
 		<div id="grailsLogo" role="banner">
 			<a href="http://www.cin.ufpe.br/~jgs/klwcin.html"><asset:image src="logo_full.png" alt="KLWCIn logo"/>KLWCIn Network</a>
 			<div class="nav" role="navigation">
-				<form action="${createLink(uri: '/j_spring_security_logout')}">
+				<g:form controller="user" action="edit" id="${session.SPRING_SECURITY_CONTEXT.authentication.principal.id}">
 					<button formaction="${createLink(uri: '/')}">Home</button>
-					<button formaction="${createLink(uri: '/user')}">Manage Users</button>
-					<button formaction="${createLink(uri: '/meeting')}">Manage Meetings</button>
+					<button formaction="${createLink(uri: '/user')}">Users</button>
+					<button formaction="${createLink(uri: '/meeting')}">Meetings</button>
 					<button formaction="${createLink(uri: '/j_spring_security_logout')}" style="float: right;">Logout</button>
+					<button style="float: right; margin-right: 4px;">
+					${User.get(session.SPRING_SECURITY_CONTEXT.authentication.principal.id)}
+					(${session.SPRING_SECURITY_CONTEXT.authentication.principal.username})
+					</button>
 					<!-- <button formaction="${createLink(uri: '/login/auth')}" style="float: right;">Login</button> -->
-				</form>
+				</g:form>
 			</div>
 		</div>
 		<g:layoutBody/>

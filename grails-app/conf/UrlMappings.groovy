@@ -1,4 +1,8 @@
+import network.klwcin.security.User
+
 class UrlMappings {
+	
+	def springSecurityService
 
 	static mappings = {
         "/$controller/$action?/$id?(.$format)?"{

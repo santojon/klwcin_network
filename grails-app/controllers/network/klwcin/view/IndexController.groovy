@@ -11,14 +11,11 @@ class IndexController {
 
     def index() {
 		
-		User u = User.get(springSecurityService.principal.id)
-		println  u.getUsername()
-		
-		ArrayList<Meeting> m = new ArrayList()
-		if(u.getType().equals('Counselor')) {
-			m = Meeting.findAll("from Meeting as m where m.date > :date order by m.date", [date: new Date()], [max: 10])
+		ArrayList<Meeting> m = []
+		if(springSecurityService.currentUser.getType().equals('Counselor')) {
+			m = Meeting.findAll("from Meeting as m where m.date > :date order by m.date", [date: new Date(hours: (new Date()).hours -= 3)], [max: 10])
 		} else {
-			m = Meeting.findAll("from Meeting as m where m.date > :date and m.type != :council order by m.date", [date: new Date(), council: 'Council'], [max: 10])
+			m = Meeting.findAll("from Meeting as m where m.date > :date and m.type != :council order by m.date", [date: new Date(hours: (new Date()).hours -= 3), council: 'Council'], [max: 10])
 		}
 		
 		//respond many lists at time

@@ -101,7 +101,7 @@
 			<p>Congratulations, you have successfully started your first meeting with us. Try to make something here.</p>
 			
 			<h1>Last News</h1>
-			<p>We're here! Version 0.1 beta is now online!</p>
+			<p>We're here! Version 0.1.1 beta is now online!</p>
 			<p>Wow! Our beta is in very test! Such dangerous! Much unstable database! Wow!</p>
 			
 		</div>
@@ -130,7 +130,7 @@
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
 						<td><g:link action="showMeeting" id="${meetingInstance.id}">${fieldValue(bean: meetingInstance, field: "place")}</g:link></td>
-						<td><g:formatDate format="dd/MM/yy - hh:mm" date="${meetingInstance.date}" /></td>
+						<td><g:formatDate format="dd/MM/yy - HH:mm" date="${meetingInstance.date}" /></td>
 						<td>${fieldValue(bean: meetingInstance, field: "type")}</td>
 						<td>${meetingInstance.participants.size()}</td>
 						<td>${fieldValue(bean: meetingInstance, field: "description")}</td>

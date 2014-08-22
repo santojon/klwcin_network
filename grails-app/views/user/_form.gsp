@@ -25,7 +25,12 @@
 		<g:message code="user.type.label" default="Type" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select name="type" from="${userInstance.constraints.type.inList}" required="" value="${userInstance?.type}" valueMessagePrefix="user.type"/>
+	<g:if test="${User.get(session.SPRING_SECURITY_CONTEXT.authentication.principal.id).getType().equals("Counselor")}">
+		<g:select name="type" from="${userInstance.constraints.type.inList}" required="" value="${userInstance?.type}" valueMessagePrefix="user.type"/>
+	</g:if>
+	<g:if test="${!User.get(session.SPRING_SECURITY_CONTEXT.authentication.principal.id).getType().equals("Counselor")}">
+		<g:select disabled="" name="type" from="${userInstance.constraints.type.inList}" required="" value="${userInstance?.type}" valueMessagePrefix="user.type"/>
+	</g:if>
 
 </div>
 
@@ -60,7 +65,12 @@
 		<g:message code="user.accountExpired.label" default="Account Expired" />
 		
 	</label>
-	<g:checkBox name="accountExpired" value="${userInstance?.accountExpired}" />
+	<g:if test="${User.get(session.SPRING_SECURITY_CONTEXT.authentication.principal.id).getType().equals("Counselor")}">
+		<g:checkBox name="accountExpired" value="${userInstance?.accountExpired}" />
+	</g:if>
+	<g:if test="${!User.get(session.SPRING_SECURITY_CONTEXT.authentication.principal.id).getType().equals("Counselor")}">
+		<g:checkBox disabled="" name="accountExpired" value="${userInstance?.accountExpired}" />
+	</g:if>
 
 </div>
 
@@ -69,7 +79,12 @@
 		<g:message code="user.accountLocked.label" default="Account Locked" />
 		
 	</label>
-	<g:checkBox name="accountLocked" value="${userInstance?.accountLocked}" />
+	<g:if test="${User.get(session.SPRING_SECURITY_CONTEXT.authentication.principal.id).getType().equals("Counselor")}">
+		<g:checkBox name="accountLocked" value="${userInstance?.accountLocked}" />
+	</g:if>
+	<g:if test="${!User.get(session.SPRING_SECURITY_CONTEXT.authentication.principal.id).getType().equals("Counselor")}">
+		<g:checkBox disabled="" name="accountLocked" value="${userInstance?.accountLocked}" />
+	</g:if>
 
 </div>
 
@@ -78,7 +93,12 @@
 		<g:message code="user.enabled.label" default="Enabled" />
 		
 	</label>
-	<g:checkBox name="enabled" value="${userInstance?.enabled}" />
+	<g:if test="${User.get(session.SPRING_SECURITY_CONTEXT.authentication.principal.id).getType().equals("Counselor")}">
+		<g:checkBox name="enabled" value="${userInstance?.enabled}" />
+	</g:if>
+	<g:if test="${!User.get(session.SPRING_SECURITY_CONTEXT.authentication.principal.id).getType().equals("Counselor")}">
+		<g:checkBox disabled="" name="enabled" value="${userInstance?.enabled}" />
+	</g:if>
 
 </div>
 
@@ -87,6 +107,11 @@
 		<g:message code="user.passwordExpired.label" default="Password Expired" />
 		
 	</label>
-	<g:checkBox name="passwordExpired" value="${userInstance?.passwordExpired}" />
+	<g:if test="${User.get(session.SPRING_SECURITY_CONTEXT.authentication.principal.id).getType().equals("Counselor")}">
+		<g:checkBox name="passwordExpired" value="${userInstance?.passwordExpired}" />
+	</g:if>
+	<g:if test="${!User.get(session.SPRING_SECURITY_CONTEXT.authentication.principal.id).getType().equals("Counselor")}">
+		<g:checkBox disabled="" name="passwordExpired" value="${userInstance?.passwordExpired}" />
+	</g:if>
 
 </div>
