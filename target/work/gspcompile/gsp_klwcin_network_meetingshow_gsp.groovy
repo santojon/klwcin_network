@@ -39,15 +39,13 @@ expressionOut.print(createLink(uri: '/'))
 printHtmlPart(6)
 invokeTag('message','g',14,['code':("default.home.label")],-1)
 printHtmlPart(7)
-createTagBody(2, {->
+expressionOut.print(createLink(uri: '/meeting/index'))
+printHtmlPart(6)
 invokeTag('message','g',15,['code':("default.list.label"),'args':([entityName])],-1)
-})
-invokeTag('link','g',15,['class':("list"),'action':("index")],2)
 printHtmlPart(8)
-createTagBody(2, {->
+expressionOut.print(createLink(uri: '/meeting/create'))
+printHtmlPart(6)
 invokeTag('message','g',16,['code':("default.new.label"),'args':([entityName])],-1)
-})
-invokeTag('link','g',16,['class':("create"),'action':("create")],2)
 printHtmlPart(9)
 invokeTag('message','g',20,['code':("default.show.label"),'args':([entityName])],-1)
 printHtmlPart(10)
@@ -85,7 +83,7 @@ if(true && (meetingInstance?.date)) {
 printHtmlPart(22)
 invokeTag('message','g',55,['code':("meeting.date.label"),'default':("Date")],-1)
 printHtmlPart(23)
-invokeTag('formatDate','g',57,['date':(meetingInstance?.date)],-1)
+invokeTag('formatDate','g',57,['format':("dd/MM/yy - HH:mm"),'date':(meetingInstance?.date)],-1)
 printHtmlPart(16)
 }
 printHtmlPart(17)
@@ -141,7 +139,7 @@ protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1407694883776L
+public static final long LAST_MODIFIED = 1408672863933L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'

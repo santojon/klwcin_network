@@ -36,26 +36,26 @@ printHtmlPart(6)
 invokeTag('message','g',34,['code':("meeting.date.label"),'default':("Date")],-1)
 printHtmlPart(2)
 invokeTag('datePicker','g',37,['name':("date"),'precision':("minute"),'value':(meetingInstance?.date)],-1)
-printHtmlPart(3)
-expressionOut.print(hasErrors(bean: meetingInstance, field: 'creator', 'error'))
 printHtmlPart(7)
+expressionOut.print(hasErrors(bean: meetingInstance, field: 'creator', 'error'))
+printHtmlPart(8)
 invokeTag('message','g',43,['code':("meeting.creator.label"),'default':("Creator")],-1)
 printHtmlPart(2)
 invokeTag('select','g',46,['id':("creator"),'name':("creator.id"),'from':(network.klwcin.security.User.list()),'optionKey':("id"),'required':(""),'value':(meetingInstance?.creator?.id),'class':("many-to-one")],-1)
-printHtmlPart(3)
+printHtmlPart(7)
 expressionOut.print(hasErrors(bean: meetingInstance, field: 'participants', 'error'))
-printHtmlPart(8)
-invokeTag('message','g',52,['code':("meeting.participants.label"),'default':("Participants")],-1)
 printHtmlPart(9)
-invokeTag('select','g',55,['name':("participants"),'required':(""),'from':(network.klwcin.security.User.list()),'multiple':("multiple"),'optionKey':("id"),'size':("5"),'value':(meetingInstance?.participants*.id),'class':("many-to-many")],-1)
+invokeTag('message','g',52,['code':("meeting.participants.label"),'default':("Participants")],-1)
 printHtmlPart(10)
+invokeTag('select','g',55,['name':("participants"),'required':(""),'from':(network.klwcin.security.User.list()),'multiple':("multiple"),'optionKey':("id"),'size':("5"),'value':(meetingInstance?.participants*.id),'class':("many-to-many")],-1)
+printHtmlPart(11)
 }
 public static final Map JSP_TAGS = new HashMap()
 protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1408240394576L
+public static final long LAST_MODIFIED = 1408672863926L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'

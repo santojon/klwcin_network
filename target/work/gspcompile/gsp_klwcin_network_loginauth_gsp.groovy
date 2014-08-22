@@ -27,42 +27,40 @@ invokeTag('captureHead','sitemesh',124,[:],1)
 printHtmlPart(3)
 createTagBody(1, {->
 printHtmlPart(4)
-invokeTag('image','asset',130,['src':("icon.png"),'alt':("KLWCIn logo")],-1)
-printHtmlPart(5)
 invokeTag('message','g',133,['code':("springSecurity.login.header")],-1)
-printHtmlPart(6)
+printHtmlPart(5)
 if(true && (flash.message)) {
-printHtmlPart(7)
+printHtmlPart(6)
 expressionOut.print(flash.message)
+printHtmlPart(7)
+}
 printHtmlPart(8)
-}
-printHtmlPart(9)
 expressionOut.print(postUrl)
-printHtmlPart(10)
+printHtmlPart(9)
 invokeTag('message','g',142,['code':("springSecurity.login.username.label")],-1)
-printHtmlPart(11)
+printHtmlPart(10)
 invokeTag('message','g',147,['code':("springSecurity.login.password.label")],-1)
-printHtmlPart(12)
+printHtmlPart(11)
 expressionOut.print(rememberMeParameter)
-printHtmlPart(13)
+printHtmlPart(12)
 if(true && (hasCookie)) {
-printHtmlPart(14)
+printHtmlPart(13)
 }
-printHtmlPart(15)
+printHtmlPart(14)
 invokeTag('message','g',153,['code':("springSecurity.login.remember.me.label")],-1)
-printHtmlPart(16)
+printHtmlPart(15)
 expressionOut.print(message(code: "springSecurity.login.button"))
-printHtmlPart(17)
+printHtmlPart(16)
 })
 invokeTag('captureBody','sitemesh',169,[:],1)
-printHtmlPart(18)
+printHtmlPart(17)
 }
 public static final Map JSP_TAGS = new HashMap()
 protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1408365010119L
+public static final long LAST_MODIFIED = 1408710551504L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'

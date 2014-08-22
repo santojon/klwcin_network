@@ -127,8 +127,7 @@
 <div id='login'>
 	<div class='inner'>
 		<div class='logo'>
-			<img src="/klwcin_network/assets/icon.png">
-			<!-- <asset:image src="icon.png" alt="KLWCIn logo"/> -->
+			<img src="http://cin.ufpe.br/~jgs/files/images/Icon.png">
 		</div>
 		<div class='fheader'>
 			<g:message code="springSecurity.login.header"/>

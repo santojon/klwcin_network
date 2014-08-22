@@ -1,3 +1,4 @@
+import network.klwcin.security.User
 import org.codehaus.groovy.grails.plugins.metadata.GrailsPlugin
 import org.codehaus.groovy.grails.web.pages.GroovyPage
 import org.codehaus.groovy.grails.web.taglib.*
@@ -14,19 +15,19 @@ registerSitemeshPreprocessMode()
 printHtmlPart(0)
 createTagBody(1, {->
 printHtmlPart(1)
-invokeTag('captureMeta','sitemesh',8,['gsp_sm_xmlClosingForEmptyTag':(""),'http-equiv':("Content-Type"),'content':("text/html; charset=UTF-8")],-1)
+invokeTag('captureMeta','sitemesh',9,['gsp_sm_xmlClosingForEmptyTag':(""),'http-equiv':("Content-Type"),'content':("text/html; charset=UTF-8")],-1)
 printHtmlPart(1)
-invokeTag('captureMeta','sitemesh',9,['gsp_sm_xmlClosingForEmptyTag':(""),'http-equiv':("X-UA-Compatible"),'content':("IE=edge,chrome=1")],-1)
+invokeTag('captureMeta','sitemesh',10,['gsp_sm_xmlClosingForEmptyTag':(""),'http-equiv':("X-UA-Compatible"),'content':("IE=edge,chrome=1")],-1)
 printHtmlPart(1)
 createTagBody(2, {->
 createTagBody(3, {->
-invokeTag('layoutTitle','g',10,['default':("KLWCIn Network")],-1)
+invokeTag('layoutTitle','g',11,['default':("KLWCIn Network")],-1)
 })
-invokeTag('captureTitle','sitemesh',10,[:],3)
+invokeTag('captureTitle','sitemesh',11,[:],3)
 })
-invokeTag('wrapTitleTag','sitemesh',10,[:],2)
+invokeTag('wrapTitleTag','sitemesh',11,[:],2)
 printHtmlPart(1)
-invokeTag('captureMeta','sitemesh',11,['gsp_sm_xmlClosingForEmptyTag':(""),'name':("viewport"),'content':("width=device-width, initial-scale=1.0")],-1)
+invokeTag('captureMeta','sitemesh',12,['gsp_sm_xmlClosingForEmptyTag':(""),'name':("viewport"),'content':("width=device-width, initial-scale=1.0")],-1)
 printHtmlPart(2)
 expressionOut.print(assetPath(src: 'Icon.png'))
 printHtmlPart(3)
@@ -34,20 +35,20 @@ expressionOut.print(assetPath(src: 'Icon.png'))
 printHtmlPart(4)
 expressionOut.print(assetPath(src: 'Icon.png'))
 printHtmlPart(5)
-invokeTag('stylesheet','asset',15,['src':("application.css")],-1)
+invokeTag('stylesheet','asset',16,['src':("application.css")],-1)
 printHtmlPart(1)
-invokeTag('javascript','asset',16,['src':("application.js")],-1)
+invokeTag('javascript','asset',17,['src':("application.js")],-1)
 printHtmlPart(1)
-invokeTag('layoutHead','g',17,[:],-1)
+invokeTag('layoutHead','g',18,[:],-1)
 printHtmlPart(6)
 })
-invokeTag('captureHead','sitemesh',18,[:],1)
+invokeTag('captureHead','sitemesh',19,[:],1)
 printHtmlPart(6)
 createTagBody(1, {->
 printHtmlPart(7)
-invokeTag('image','asset',21,['src':("logo_full.png"),'alt':("KLWCIn logo")],-1)
+invokeTag('image','asset',22,['src':("logo_full.png"),'alt':("KLWCIn logo")],-1)
 printHtmlPart(8)
-expressionOut.print(createLink(uri: '/j_spring_security_logout'))
+createTagBody(2, {->
 printHtmlPart(9)
 expressionOut.print(createLink(uri: '/'))
 printHtmlPart(10)
@@ -57,22 +58,29 @@ expressionOut.print(createLink(uri: '/meeting'))
 printHtmlPart(12)
 expressionOut.print(createLink(uri: '/j_spring_security_logout'))
 printHtmlPart(13)
-expressionOut.print(createLink(uri: '/login/auth'))
+expressionOut.print(User.get(session.SPRING_SECURITY_CONTEXT.authentication.principal.id))
 printHtmlPart(14)
-invokeTag('layoutBody','g',32,[:],-1)
+expressionOut.print(session.SPRING_SECURITY_CONTEXT.authentication.principal.username)
 printHtmlPart(15)
-invokeTag('message','g',34,['code':("spinner.alt"),'default':("Loading&hellip;")],-1)
+expressionOut.print(createLink(uri: '/login/auth'))
 printHtmlPart(16)
 })
-invokeTag('captureBody','sitemesh',35,[:],1)
+invokeTag('form','g',34,['controller':("user"),'action':("edit"),'id':(session.SPRING_SECURITY_CONTEXT.authentication.principal.id)],2)
 printHtmlPart(17)
+invokeTag('layoutBody','g',37,[:],-1)
+printHtmlPart(18)
+invokeTag('message','g',39,['code':("spinner.alt"),'default':("Loading&hellip;")],-1)
+printHtmlPart(19)
+})
+invokeTag('captureBody','sitemesh',40,[:],1)
+printHtmlPart(20)
 }
 public static final Map JSP_TAGS = new HashMap()
 protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1408200641808L
+public static final long LAST_MODIFIED = 1408672863923L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'
