@@ -33,4 +33,12 @@ class FinanceController {
 		}
 		return balance
 	}
+	
+	def showDonation(Donation donation) {
+		render(view: '/donation/show', model: [donationInstance: donation])
+	}
+	
+	def showExpense(Expense expense) {
+		render(view: '/expense/show', model: [expenseInstance: expense])
+	}
 }
