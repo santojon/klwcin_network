@@ -68,6 +68,15 @@ grails.project.dependency.resolution = {
 		
 		//spring security
 		compile ':spring-security-core:2.0-RC4'
+		
+		//spring security UI
+		compile: ":spring-security-ui:1.0-RC2"
+		
+		//rich UI plugin
+		compile: ":richui:0.8"
+		
+		//twitter bootstrap
+		compile: ":twitter-bootstrap:3.2.0.2"
 
         // plugins needed at runtime but not for compilation
         runtime ":hibernate4:4.3.5.4" // or ":hibernate:3.6.10.16"

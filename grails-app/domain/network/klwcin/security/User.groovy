@@ -26,10 +26,10 @@ class User {
 		name(size: 2..45)
 		email(email: true)
 		type(inList: ["Aspirant", "Common", "Counselor"])
-		phone nullable: true
+		phone(nullable: true)
 		
-		username blank: false, unique: true
-		password blank: false, password:true
+		username(blank: false, unique: true)
+		password(blank: false, password:true)
 		
 		//meetings blank: true
 	}

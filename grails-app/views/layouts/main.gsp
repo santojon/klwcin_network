@@ -25,6 +25,7 @@
 					<button formaction="${createLink(uri: '/')}">Home</button>
 					<button formaction="${createLink(uri: '/user')}">Users</button>
 					<button formaction="${createLink(uri: '/meeting')}">Meetings</button>
+					<button formaction="${createLink(uri: '/finance')}">Finances</button>
 					<button formaction="${createLink(uri: '/j_spring_security_logout')}" style="float: right;">Logout</button>
 					<button style="float: right; margin-right: 4px;">
 					${User.get(session.SPRING_SECURITY_CONTEXT.authentication.principal.id)}
