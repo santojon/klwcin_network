@@ -26,7 +26,7 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<g:field name="value" value="${fieldValue(bean: donationInstance, field: 'value')}" required=""/>
-
+	If Type isn't "Monetary", value must be R$ 0.0
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: donationInstance, field: 'date', 'error')} required">

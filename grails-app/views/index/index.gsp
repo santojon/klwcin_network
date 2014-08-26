@@ -101,7 +101,7 @@
 			<p>Congratulations, you have successfully started your first meeting with us. Try to make something here.</p>
 			
 			<h1>Last News</h1>
-			<p>We're here! Version 0.1.1 beta is now online!</p>
+			<p>We're here! Version 0.1.2 beta is now online!</p>
 			<p>Wow! Our beta is in very test! Such dangerous! Much unstable database! Wow!</p>
 			
 		</div>

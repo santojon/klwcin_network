@@ -12,7 +12,7 @@ class Donation {
 
     static constraints = {
 		description(size: 0..100)
-		type(inList: ["Monetary", "Ingredient", "accompaniment"])
+		type(inList: ["Monetary", "Ingredient", "Accompaniment"])
 		value(validator: {return it >= new Double(0)})
 		
 		//UTC - 3 validation (hell server!)

@@ -56,31 +56,33 @@ expressionOut.print(createLink(uri: '/user'))
 printHtmlPart(11)
 expressionOut.print(createLink(uri: '/meeting'))
 printHtmlPart(12)
-expressionOut.print(createLink(uri: '/j_spring_security_logout'))
+expressionOut.print(createLink(uri: '/finance'))
 printHtmlPart(13)
-expressionOut.print(User.get(session.SPRING_SECURITY_CONTEXT.authentication.principal.id))
+expressionOut.print(createLink(uri: '/j_spring_security_logout'))
 printHtmlPart(14)
-expressionOut.print(session.SPRING_SECURITY_CONTEXT.authentication.principal.username)
+expressionOut.print(User.get(session.SPRING_SECURITY_CONTEXT.authentication.principal.id))
 printHtmlPart(15)
-expressionOut.print(createLink(uri: '/login/auth'))
+expressionOut.print(session.SPRING_SECURITY_CONTEXT.authentication.principal.username)
 printHtmlPart(16)
-})
-invokeTag('form','g',34,['controller':("user"),'action':("edit"),'id':(session.SPRING_SECURITY_CONTEXT.authentication.principal.id)],2)
+expressionOut.print(createLink(uri: '/login/auth'))
 printHtmlPart(17)
-invokeTag('layoutBody','g',37,[:],-1)
-printHtmlPart(18)
-invokeTag('message','g',39,['code':("spinner.alt"),'default':("Loading&hellip;")],-1)
-printHtmlPart(19)
 })
-invokeTag('captureBody','sitemesh',40,[:],1)
+invokeTag('form','g',35,['controller':("user"),'action':("edit"),'id':(session.SPRING_SECURITY_CONTEXT.authentication.principal.id)],2)
+printHtmlPart(18)
+invokeTag('layoutBody','g',38,[:],-1)
+printHtmlPart(19)
+invokeTag('message','g',40,['code':("spinner.alt"),'default':("Loading&hellip;")],-1)
 printHtmlPart(20)
+})
+invokeTag('captureBody','sitemesh',41,[:],1)
+printHtmlPart(21)
 }
 public static final Map JSP_TAGS = new HashMap()
 protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1408672863923L
+public static final long LAST_MODIFIED = 1409021019768L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'
