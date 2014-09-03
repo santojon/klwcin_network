@@ -82,6 +82,12 @@
 	</head>
 	<body>
 		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+		<div class="nav" role="navigation">
+			<g:form controller="expense" action="create">
+					<button style="float: right;">Register Expense</button>
+					<button formaction="${createLink(controller: 'donation', action: 'create')}">Register Donation</button>
+			</g:form>
+		</div>
 		<div>
 			<table>
 			<thead>
@@ -110,7 +116,7 @@
 						<td>Donation - ${fieldValue(bean: donationInstance, field: "type")}</td>
 						<td>${fieldValue(bean: donationInstance, field: "description")}</td>
 						<td><g:formatDate format="dd/MM/yy" date="${donationInstance.date}" /></td>
-						<td>${donationInstance.value}</td>
+						<td>${donationInstance.value.round(2)}</td>
 						
 					</tr>
 				</g:each>
@@ -121,7 +127,7 @@
 						<td>Expense</td>
 						<td>${fieldValue(bean: expenseInstance, field: "description")}</td>
 						<td><g:formatDate format="dd/MM/yy" date="${expenseInstance.date}" /></td>
-						<td>${expenseInstance.value}</td>
+						<td>${expenseInstance.value.round(2)}</td>
 						
 					</tr>
 				</g:each>
@@ -130,16 +136,10 @@
 					<g:sortableColumn property="next2" title="${message(code: ' ')}" />
 					<g:sortableColumn property="next2" title="${message(code: ' ')}" />
 					<g:sortableColumn property="next2" title="${message(code: 'Balance:')}" />
-					<td>${balance}</td>
+					<td>${balance.round(2)}</td>
 				</tr>
 				</tbody>
 			</table>
-		</div>
-		<div class="nav" role="navigation">
-			<g:form controller="expense" action="create">
-					<button style="float: right;">Register Expense</button>
-					<button formaction="${createLink(controller: 'donation', action: 'create')}">Register Donation</button>
-			</g:form>
 		</div>
 	</body>
 </html>

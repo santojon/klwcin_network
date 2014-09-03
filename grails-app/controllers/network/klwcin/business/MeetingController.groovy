@@ -58,7 +58,7 @@ class MeetingController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'meeting.label', default: 'Meeting'), meetingInstance.id])
+                flash.message = message(code: 'meeting.created.message', args: [message(code: 'meeting.label', default: 'Meeting'), meetingInstance.date])
                 redirect meetingInstance
             }
             '*' { respond meetingInstance, [status: CREATED] }
@@ -99,7 +99,7 @@ class MeetingController {
 							
 				request.withFormat {
 					form multipartForm {
-						flash.message = message(code: 'default.updated.message', args: [message(code: 'Meeting.label', default: 'Meeting'), meetingInstance.id])
+						flash.message = message(code: 'meeting.updated.message', args: [message(code: 'Meeting.label', default: 'Meeting'), meetingInstance.date])
 						redirect meetingInstance
 					}
 					'*'{ respond meetingInstance, [status: OK] }
@@ -112,7 +112,7 @@ class MeetingController {
 			
 			request.withFormat {
 				form multipartForm {
-					flash.message = message(code: 'default.updated.message', args: [message(code: 'Meeting.label', default: 'Meeting'), meetingInstance.id])
+					flash.message = message(code: 'meeting.updated.message', args: [message(code: 'Meeting.label', default: 'Meeting'), meetingInstance.date])
 					redirect meetingInstance
 				}
 				'*'{ respond meetingInstance, [status: OK] }
@@ -134,7 +134,7 @@ class MeetingController {
 			
 			request.withFormat {
 				form multipartForm {
-					flash.message = message(code: 'default.deleted.message', args: [message(code: 'Meeting.label', default: 'Meeting'), meetingInstance.id])
+					flash.message = message(code: 'meeting.deleted.message', args: [message(code: 'Meeting.label', default: 'Meeting'), meetingInstance.date])
 					redirect action:"index", method:"GET"
 				}
 				'*'{ render status: NO_CONTENT }

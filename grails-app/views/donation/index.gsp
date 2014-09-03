@@ -11,7 +11,6 @@
 		<a href="#list-donation" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
 				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
 			</ul>
 		</div>
@@ -44,7 +43,7 @@
 					
 						<td>${fieldValue(bean: donationInstance, field: "type")}</td>
 					
-						<td>${fieldValue(bean: donationInstance, field: "value")}</td>
+						<td>${donationInstance.value.round(2)}</td>
 					
 						<td><g:formatDate format="dd/MM/yy" date="${donationInstance?.date}" /></td>
 					

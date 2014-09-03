@@ -1,4 +1,6 @@
 package network.klwcin.security
+import java.awt.Graphics;
+
 import network.klwcin.business.Meeting
 
 class User {
@@ -13,25 +15,35 @@ class User {
 	String username
 	String password
 	
+	//Graphics image
+	
 	boolean enabled = true
-	boolean accountExpired
+	
+	//penal
+	int advertments = 0
 	boolean accountLocked
+	Date unlockDate
+	
+	//spring security
+	boolean accountExpired
 	boolean passwordExpired
 	
-	//static belongsTo = [meetings: Meeting]
+	//static xxxxxx = ['image']
 
 	static transients = ['springSecurityService']
 
 	static constraints = {
+		//image(nullable: true)
 		name(size: 2..45)
 		email(email: true)
 		type(inList: ["Aspirant", "Common", "Counselor"])
 		phone(nullable: true)
 		
 		username(blank: false, unique: true)
-		password(blank: false, password:true)
+		password(blank: false, password:true, size:2..64)
 		
-		//meetings blank: true
+		advertments(nullable: true)
+		unlockDate(nullable: true)
 	}
 	
 	String toString() {

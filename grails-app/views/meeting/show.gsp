@@ -11,7 +11,6 @@
 		<a href="#show-meeting" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
 				<li><a class="list" href="${createLink(uri: '/meeting/index')}"><g:message code="default.list.label" args="[entityName]" /></a></li>
 				<li><a class="create" href="${createLink(uri: '/meeting/create')}"><g:message code="default.new.label" args="[entityName]" /></a></li>
 			</ul>
