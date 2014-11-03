@@ -1,144 +1,156 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="layout" content="main"/>
+		<meta name="layout" content="main">
 		<title>KLWCIn Network</title>
-		<style type="text/css" media="screen">
-			#status {
-				background-color: #eee;
-				border: .2em solid #fff;
-				margin: 2em 2em 1em;
-				padding: 1em;
-				width: 12em;
-				float: left;
-				-moz-box-shadow: 0px 0px 1.25em #ccc;
-				-webkit-box-shadow: 0px 0px 1.25em #ccc;
-				box-shadow: 0px 0px 1.25em #ccc;
-				-moz-border-radius: 0.6em;
-				-webkit-border-radius: 0.6em;
-				border-radius: 0.6em;
-			}
-
-			.ie6 #status {
-				display: inline; /* float double margin fix http://www.positioniseverything.net/explorer/doubled-margin.html */
-			}
-
-			#status ul {
-				font-size: 0.9em;
-				list-style-type: none;
-				margin-bottom: 0.6em;
-				padding: 0;
-			}
-
-			#status li {
-				line-height: 1.3;
-			}
-
-			#status h1 {
-				text-transform: uppercase;
-				font-size: 1.1em;
-				margin: 0 0 0.3em;
-			}
-
-			#page-body {
-				margin: 2em 1em 1.25em 18em;
-			}
-
-			h2 {
-				margin-top: 1em;
-				margin-bottom: 0.3em;
-				font-size: 1em;
-			}
-
-			p {
-				line-height: 1.5;
-				margin: 0.25em 0;
-			}
-
-			#controller-list ul {
-				list-style-position: inside;
-			}
-
-			#controller-list li {
-				line-height: 1.3;
-				list-style-position: inside;
-				margin: 0.25em 0;
-			}
-
-			@media screen and (max-width: 480px) {
-				#status {
-					display: none;
-				}
-
-				#page-body {
-					margin: 0 1em 1em;
-				}
-
-				#page-body h1 {
-					margin-top: 0;
-				}
-			}
-		</style>
 	</head>
 	<body>
-		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div id="status" role="complementary">
-			<br>
-			<h1>Members total</h1>
-			<ul>${users.size()}</ul>
-			<br>
-			<h1>Actual Counselors</h1>
-			<ul>
-				<g:each in="${users}" status="i" var="userInstance">
-					<g:if test="${userInstance.type == 'Counselor'}">
-						<li>${userInstance.name}</li>
-					</g:if>
-				</g:each>
-			</ul>
-		</div>
-		<div id="page-body" role="main">
-			<h1>Welcome to KLWCIn Network</h1>
-			<p>Congratulations, you have successfully started your first meeting with us. Try to make something here.</p>
+		<div id="page-body" class="content" role="main">
+		
+		<div id="table-container">
+			<div id="table-row">
 			
-			<h1>Last News</h1>
-			<p>We're here! Version 0.1.1 beta is now online!</p>
-			<p>Wow! Our beta is in very test! Such dangerous! Much unstable database! Wow!</p>
+				<div id="table-content">
+		<!-- HOME PAGE CONTENT -->
+		<div class="main-content" role="main">
+		
+			<!-- TITLE -->
+				<h1 class="page-title" id="title_index" >Welcome to KLWCIn Network</h1>
+			<!-- / TITLE -->
+			
+			<div id=info role="main">
+				<p>Congratulations, you have successfully entered the network. It means you are one of us. Try to make something here.</p>
+				
+				<br>
+				<h2>Latest News</h2>
+				<br>
+				
+				<p>We're here! Modernized version 0.2 beta is now online!</p>
+				<p>Wow! Our beta is in very test! Such dangerous! <s>Much unstable database!</s> Wow!</p>
+				<p>Database is now ok! New functionalities coming... Very supimpa, hum?!</p>
+				<br>
+			</div>
+			
+			<!-- GRID -->
+			<h2>Next Meetings</h2>
+				<div class="col-lg-12 padding0">
+	
+					<div class="table-responsive">
+					
+						<table class="table grid table-hover table-striped">
+							<thead>
+								<tr>
+									<g:sortableColumn property="place" title="${message(code: 'meeting.place.label', default: 'Place')}" />
+									<g:sortableColumn property="date" title="${message(code: 'meeting.date.label', default: 'Date')}" />
+									<g:sortableColumn property="type" title="${message(code: 'meeting.type.label', default: 'Type')}" />
+									<g:sortableColumn property="total" title="${message(code: 'Total of participants')}" />
+									<g:sortableColumn property="description" title="${message(code: 'meeting.description.label', default: 'Description')}" />
+									<th class="width30">&nbsp;</th>
+								</tr>
+							</thead>
+							<tbody>
+							
+								<!-- NO RECORD MESSAGE -->
+								<g:if test="${meetings == []}">
+								<tr class="tr-empty-grid">
+									<td colspan="5">Empty list</td>
+									<th class="width30">&nbsp;</th>
+								</tr>
+								</g:if>
+								<!-- NO RECORD MESSAGE -->
+								
+								<g:each in="${meetings}" status="i" var="meetingInstance">
+								<tr id="line_${i}">
+									<td><span class="block" title="Meeting" onClick="editMeeting('${meetingInstance.id}');">${fieldValue(bean: meetingInstance, field: "place")}</span></td>
+									<td><span class="block" title="Meeting" onClick="editMeeting('${meetingInstance.id}');"><g:formatDate format="dd/MM/yy - HH:mm" date="${meetingInstance.date}" /></span></td>
+									<td><span class="block" title="Meeting" onClick="editMeeting('${meetingInstance.id}');">${fieldValue(bean: meetingInstance, field: "type")}</span></td>
+									<td><span class="block" title="Meeting" onClick="editMeeting('${meetingInstance.id}');">${meetingInstance.participants.size()}</span></td>
+									<td><span class="block" title="Meeting" onClick="editMeeting('${meetingInstance.id}');">${fieldValue(bean: meetingInstance, field: "description")}</span></td>
+									<td><span></span></td>
+								</tr>
+								</g:each>
+							</tbody>
+						</table>
+					</div>
+					
+				</div>
+				<!-- GRID -->
 			
 		</div>
-		<div>
-			<table>
-			<thead>
-					<tr>
-						<g:sortableColumn property="next" title="${message(code: 'Next Meetings')}" />
-						<g:sortableColumn property="next1" title="${message(code: ' ')}" />
-						<g:sortableColumn property="next2" title="${message(code: ' ')}" />
-						<g:sortableColumn property="next2" title="${message(code: ' ')}" />
-						<g:sortableColumn property="next2" title="${message(code: ' ')}" />
-					</tr>
-					<tr>
-					
-						<g:sortableColumn property="place" title="${message(code: 'meeting.place.label', default: 'Place')}" />
-						<g:sortableColumn property="date" title="${message(code: 'meeting.date.label', default: 'Date')}" />
-						<g:sortableColumn property="type" title="${message(code: 'meeting.type.label', default: 'Type')}" />
-						<g:sortableColumn property="total" title="${message(code: 'Total of participants')}" />
-						<g:sortableColumn property="description" title="${message(code: 'meeting.description.label', default: 'Description')}" />
-					
-					</tr>
-				</thead>
-				<tbody>
-				<g:each in="${meetings}" status="i" var="meetingInstance">
-					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
-						<td><g:link action="showMeeting" id="${meetingInstance.id}">${fieldValue(bean: meetingInstance, field: "place")}</g:link></td>
-						<td><g:formatDate format="dd/MM/yy - HH:mm" date="${meetingInstance.date}" /></td>
-						<td>${fieldValue(bean: meetingInstance, field: "type")}</td>
-						<td>${meetingInstance.participants.size()}</td>
-						<td>${fieldValue(bean: meetingInstance, field: "description")}</td>
-						
-					</tr>
-				</g:each>
-				</tbody>
-			</table>
+		</div>
+		
+		<div id="table-filter">
+		<div id="status" role="complementary" class="filter-container clearfix">
+			<div class="panel-group" id="accordion">
+			
+				<!-- LATERAL BAR -->				
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Actual Counselors</a>
+							<a href="#collapse1" data-toggle="collapse" title="Collapse/Expand Counselors" class="a-icon pull-right" ><span class="fa fa-angle-down"></span></a>
+						</h4>
+					</div>
+					<div id="collapse1" class="panel-collapse collapse collapsePanel">
+						<div class="panel-body">
+							<ul>
+								<g:each in="${users}" status="i" var="userInstance">
+									<g:if test="${userInstance.type == 'Counselor'}">
+										<li>${userInstance.name} (${userInstance.username})</li>
+									</g:if>
+								</g:each>
+							</ul>
+						</div>
+					</div>
+				</div>
+				
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Actual Members</a>
+							<a href="#collapse2" data-toggle="collapse" title="Collapse/Expand Members" class="a-icon pull-right" ><span class="fa fa-angle-down"></span></a>
+						</h4>
+					</div>
+					<div id="collapse2" class="panel-collapse collapse collapsePanel">
+						<div class="panel-body">
+							<ul>
+								<g:each in="${users}" status="i" var="userInstance">
+									<g:if test="${userInstance.type == 'Common'}">
+										<li>${userInstance.name} (${userInstance.username})</li>
+									</g:if>
+								</g:each>
+							</ul>
+						</div>
+					</div>
+				</div>
+				
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Actual Aspirants</a>
+							<a href="#collapse3" data-toggle="collapse" title="Collapse/Expand Aspitants" class="a-icon pull-right" ><span class="fa fa-angle-down"></span></a>
+						</h4>
+					</div>
+					<div id="collapse3" class="panel-collapse collapse collapsePanel">
+						<div class="panel-body">
+							<ul>
+								<g:each in="${users}" status="i" var="userInstance">
+									<g:if test="${userInstance.type == 'Aspirant'}">
+										<li>${userInstance.name} (${userInstance.username})</li>
+									</g:if>
+								</g:each>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!-- / LATERAL BAR -->
+				</div>
+				</div>
+			<br>
+		</div>
+		
+		</div>
+		</div>
 		</div>
 	</body>
 </html>
