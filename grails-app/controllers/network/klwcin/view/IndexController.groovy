@@ -21,9 +21,4 @@ class IndexController {
 		//respond many lists at time
 		[meetings: m, users: User.findAll()]
 	}
-	
-	def showMeeting(Meeting meeting) {
-		render(view: '/meeting/show', model: [meetingInstance: meeting])
-		//redirect(controller:"Meeting",action:"show") 		// -- não funfa com parâmetros
-	}
 }

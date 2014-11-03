@@ -35,93 +35,87 @@ createTagBody(1, {->
 printHtmlPart(4)
 invokeTag('message','g',11,['code':("default.link.skip.label"),'default':("Skip to content&hellip;")],-1)
 printHtmlPart(5)
-expressionOut.print(createLink(uri: '/'))
+expressionOut.print(createLink(uri: '/donation'))
 printHtmlPart(6)
-invokeTag('message','g',14,['code':("default.home.label")],-1)
+invokeTag('message','g',14,['code':("default.list.label"),'args':([entityName])],-1)
 printHtmlPart(7)
-createTagBody(2, {->
-invokeTag('message','g',15,['code':("default.list.label"),'args':([entityName])],-1)
-})
-invokeTag('link','g',15,['class':("list"),'action':("index")],2)
+expressionOut.print(createLink(uri: '/donation/create'))
+printHtmlPart(6)
+invokeTag('message','g',15,['code':("default.new.label"),'args':([entityName])],-1)
 printHtmlPart(8)
-createTagBody(2, {->
-invokeTag('message','g',16,['code':("default.new.label"),'args':([entityName])],-1)
-})
-invokeTag('link','g',16,['class':("create"),'action':("create")],2)
+invokeTag('message','g',19,['code':("default.show.label"),'args':([entityName])],-1)
 printHtmlPart(9)
-invokeTag('message','g',20,['code':("default.show.label"),'args':([entityName])],-1)
-printHtmlPart(10)
 if(true && (flash.message)) {
-printHtmlPart(11)
+printHtmlPart(10)
 expressionOut.print(flash.message)
+printHtmlPart(11)
+}
 printHtmlPart(12)
-}
-printHtmlPart(13)
 if(true && (donationInstance?.description)) {
+printHtmlPart(13)
+invokeTag('message','g',27,['code':("donation.description.label"),'default':("Description")],-1)
 printHtmlPart(14)
-invokeTag('message','g',28,['code':("donation.description.label"),'default':("Description")],-1)
+invokeTag('fieldValue','g',29,['bean':(donationInstance),'field':("description")],-1)
 printHtmlPart(15)
-invokeTag('fieldValue','g',30,['bean':(donationInstance),'field':("description")],-1)
-printHtmlPart(16)
 }
-printHtmlPart(17)
+printHtmlPart(16)
 if(true && (donationInstance?.type)) {
+printHtmlPart(17)
+invokeTag('message','g',36,['code':("donation.type.label"),'default':("Type")],-1)
 printHtmlPart(18)
-invokeTag('message','g',37,['code':("donation.type.label"),'default':("Type")],-1)
+invokeTag('fieldValue','g',38,['bean':(donationInstance),'field':("type")],-1)
+printHtmlPart(15)
+}
+printHtmlPart(16)
+if(true && (donationInstance?.value.round(2))) {
 printHtmlPart(19)
-invokeTag('fieldValue','g',39,['bean':(donationInstance),'field':("type")],-1)
-printHtmlPart(16)
-}
-printHtmlPart(17)
-if(true && (donationInstance?.value)) {
+invokeTag('message','g',45,['code':("donation.value.label"),'default':("Value")],-1)
 printHtmlPart(20)
-invokeTag('message','g',46,['code':("donation.value.label"),'default':("Value")],-1)
-printHtmlPart(21)
-invokeTag('fieldValue','g',48,['bean':(donationInstance),'field':("value")],-1)
-printHtmlPart(16)
+invokeTag('fieldValue','g',47,['bean':(donationInstance),'field':("value")],-1)
+printHtmlPart(15)
 }
-printHtmlPart(17)
+printHtmlPart(16)
 if(true && (donationInstance?.date)) {
+printHtmlPart(21)
+invokeTag('message','g',54,['code':("donation.date.label"),'default':("Date")],-1)
 printHtmlPart(22)
-invokeTag('message','g',55,['code':("donation.date.label"),'default':("Date")],-1)
-printHtmlPart(23)
-invokeTag('formatDate','g',57,['format':("dd/MM/yy"),'date':(donationInstance?.date)],-1)
-printHtmlPart(16)
+invokeTag('formatDate','g',56,['format':("dd/MM/yy"),'date':(donationInstance?.date)],-1)
+printHtmlPart(15)
 }
-printHtmlPart(17)
+printHtmlPart(16)
 if(true && (donationInstance?.donator)) {
+printHtmlPart(23)
+invokeTag('message','g',63,['code':("donation.donator.label"),'default':("Donator")],-1)
 printHtmlPart(24)
-invokeTag('message','g',64,['code':("donation.donator.label"),'default':("Donator")],-1)
-printHtmlPart(25)
 createTagBody(3, {->
 expressionOut.print(donationInstance?.donator?.encodeAsHTML())
 })
-invokeTag('link','g',66,['controller':("user"),'action':("show"),'id':(donationInstance?.donator?.id)],3)
-printHtmlPart(16)
+invokeTag('link','g',65,['controller':("user"),'action':("show"),'id':(donationInstance?.donator?.id)],3)
+printHtmlPart(15)
 }
-printHtmlPart(26)
+printHtmlPart(25)
 createTagBody(2, {->
-printHtmlPart(27)
+printHtmlPart(26)
 createTagBody(3, {->
-invokeTag('message','g',74,['code':("default.button.edit.label"),'default':("Edit")],-1)
+invokeTag('message','g',73,['code':("default.button.edit.label"),'default':("Edit")],-1)
 })
-invokeTag('link','g',74,['class':("edit"),'action':("edit"),'resource':(donationInstance)],3)
+invokeTag('link','g',73,['class':("edit"),'action':("edit"),'resource':(donationInstance)],3)
+printHtmlPart(27)
+invokeTag('actionSubmit','g',74,['class':("delete"),'action':("delete"),'value':(message(code: 'default.button.delete.label', default: 'Delete')),'onclick':("return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');")],-1)
 printHtmlPart(28)
-invokeTag('actionSubmit','g',75,['class':("delete"),'action':("delete"),'value':(message(code: 'default.button.delete.label', default: 'Delete')),'onclick':("return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');")],-1)
+})
+invokeTag('form','g',76,['url':([resource:donationInstance, action:'delete']),'method':("DELETE")],2)
 printHtmlPart(29)
 })
-invokeTag('form','g',77,['url':([resource:donationInstance, action:'delete']),'method':("DELETE")],2)
+invokeTag('captureBody','sitemesh',78,[:],1)
 printHtmlPart(30)
-})
-invokeTag('captureBody','sitemesh',79,[:],1)
-printHtmlPart(31)
 }
 public static final Map JSP_TAGS = new HashMap()
 protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1409015361226L
+public static final long LAST_MODIFIED = 1409703020855L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'

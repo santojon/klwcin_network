@@ -22,45 +22,57 @@ invokeTag('captureTitle','sitemesh',3,[:],3)
 })
 invokeTag('wrapTitleTag','sitemesh',3,[:],2)
 printHtmlPart(2)
-})
-invokeTag('captureHead','sitemesh',124,[:],1)
+invokeTag('stylesheet','asset',5,['src':("bootstrap.css")],-1)
 printHtmlPart(3)
-createTagBody(1, {->
+invokeTag('stylesheet','asset',7,['src':("application.css")],-1)
 printHtmlPart(4)
-invokeTag('message','g',133,['code':("springSecurity.login.header")],-1)
+invokeTag('stylesheet','asset',8,['src':("signin.css")],-1)
+printHtmlPart(4)
+invokeTag('stylesheet','asset',9,['src':("font-awesome.min.css")],-1)
 printHtmlPart(5)
-if(true && (flash.message)) {
+invokeTag('javascript','asset',13,['src':("html5shiv.js")],-1)
 printHtmlPart(6)
-expressionOut.print(flash.message)
+invokeTag('javascript','asset',14,['src':("respond.min.js")],-1)
 printHtmlPart(7)
-}
+})
+invokeTag('captureHead','sitemesh',16,[:],1)
 printHtmlPart(8)
-expressionOut.print(postUrl)
+createTagBody(1, {->
 printHtmlPart(9)
-invokeTag('message','g',142,['code':("springSecurity.login.username.label")],-1)
+invokeTag('image','asset',24,['src':("logo_full.png")],-1)
 printHtmlPart(10)
-invokeTag('message','g',147,['code':("springSecurity.login.password.label")],-1)
+expressionOut.print(postUrl)
 printHtmlPart(11)
-expressionOut.print(rememberMeParameter)
+if(true && (flash.message)) {
 printHtmlPart(12)
-if(true && (hasCookie)) {
+expressionOut.print(flash.message)
 printHtmlPart(13)
 }
 printHtmlPart(14)
-invokeTag('message','g',153,['code':("springSecurity.login.remember.me.label")],-1)
+invokeTag('message','g',45,['code':("springSecurity.login.username.label"),'default':("Login")],-1)
 printHtmlPart(15)
-expressionOut.print(message(code: "springSecurity.login.button"))
+invokeTag('message','g',53,['code':("springSecurity.login.password.label"),'default':("Password")],-1)
 printHtmlPart(16)
-})
-invokeTag('captureBody','sitemesh',169,[:],1)
+expressionOut.print(rememberMeParameter)
 printHtmlPart(17)
+if(true && (hasCookie)) {
+printHtmlPart(18)
+}
+printHtmlPart(19)
+invokeTag('message','g',62,['code':("springSecurity.login.remember.me.label")],-1)
+printHtmlPart(20)
+expressionOut.print(message(code: "springSecurity.login.button"))
+printHtmlPart(21)
+})
+invokeTag('captureBody','sitemesh',76,['class':("login")],1)
+printHtmlPart(22)
 }
 public static final Map JSP_TAGS = new HashMap()
 protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1408711490411L
+public static final long LAST_MODIFIED = 1414991943648L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'

@@ -1,4 +1,5 @@
 import network.klwcin.business.Meeting
+import network.klwcin.security.User
 import org.codehaus.groovy.grails.plugins.metadata.GrailsPlugin
 import org.codehaus.groovy.grails.web.pages.GroovyPage
 import org.codehaus.groovy.grails.web.taglib.*
@@ -13,88 +14,55 @@ Writer out = getOut()
 Writer expressionOut = getExpressionOut()
 registerSitemeshPreprocessMode()
 printHtmlPart(0)
+printHtmlPart(1)
 createTagBody(1, {->
-printHtmlPart(1)
-invokeTag('captureMeta','sitemesh',5,['gsp_sm_xmlClosingForEmptyTag':(""),'name':("layout"),'content':("main")],-1)
-printHtmlPart(1)
-invokeTag('set','g',6,['var':("entityName"),'value':(message(code: 'meeting.label', default: 'Meeting'))],-1)
-printHtmlPart(1)
+printHtmlPart(2)
+invokeTag('captureMeta','sitemesh',6,['gsp_sm_xmlClosingForEmptyTag':(""),'name':("layout"),'content':("main")],-1)
+printHtmlPart(2)
+invokeTag('set','g',7,['var':("entityName"),'value':(message(code: 'meeting.label', default: 'Meeting'))],-1)
+printHtmlPart(2)
 createTagBody(2, {->
 createTagBody(3, {->
-invokeTag('message','g',7,['code':("default.edit.label"),'args':([entityName])],-1)
+invokeTag('message','g',8,['code':("default.edit.label"),'args':([entityName])],-1)
 })
-invokeTag('captureTitle','sitemesh',7,[:],3)
+invokeTag('captureTitle','sitemesh',8,[:],3)
 })
-invokeTag('wrapTitleTag','sitemesh',7,[:],2)
-printHtmlPart(2)
-})
-invokeTag('captureHead','sitemesh',8,[:],1)
-printHtmlPart(2)
-createTagBody(1, {->
+invokeTag('wrapTitleTag','sitemesh',8,[:],2)
 printHtmlPart(3)
-invokeTag('message','g',10,['code':("default.link.skip.label"),'default':("Skip to content&hellip;")],-1)
+})
+invokeTag('captureHead','sitemesh',9,[:],1)
+printHtmlPart(3)
+createTagBody(1, {->
 printHtmlPart(4)
-expressionOut.print(createLink(uri: '/'))
+invokeTag('message','g',13,['code':("default.edit.label"),'args':([entityName])],-1)
 printHtmlPart(5)
-invokeTag('message','g',13,['code':("default.home.label")],-1)
+createTagBody(2, {->
 printHtmlPart(6)
-createTagBody(2, {->
-invokeTag('message','g',14,['code':("default.list.label"),'args':([entityName])],-1)
-})
-invokeTag('link','g',14,['class':("list"),'action':("index")],2)
+invokeTag('hiddenField','g',16,['name':("version"),'value':(meetingInstance?.version)],-1)
 printHtmlPart(7)
-createTagBody(2, {->
-invokeTag('message','g',15,['code':("default.new.label"),'args':([entityName])],-1)
-})
-invokeTag('link','g',15,['class':("create"),'action':("create")],2)
+invokeTag('render','g',20,['template':("/general/show-flash-messages")],-1)
 printHtmlPart(8)
-invokeTag('message','g',19,['code':("default.edit.label"),'args':([entityName])],-1)
+invokeTag('render','g',24,['template':("form")],-1)
 printHtmlPart(9)
-if(true && (flash.message)) {
+if(true && (User.get(session.SPRING_SECURITY_CONTEXT.authentication.principal.id).getType().equals("Counselor"))) {
 printHtmlPart(10)
-expressionOut.print(flash.message)
+}
 printHtmlPart(11)
-}
+expressionOut.print(meetingInstance?.id)
 printHtmlPart(12)
-createTagBody(2, {->
-printHtmlPart(13)
-createTagBody(3, {->
-printHtmlPart(14)
-if(true && (error in org.springframework.validation.FieldError)) {
-printHtmlPart(15)
-expressionOut.print(error.field)
-printHtmlPart(16)
-}
-printHtmlPart(17)
-invokeTag('message','g',26,['error':(error)],-1)
-printHtmlPart(18)
-})
-invokeTag('eachError','g',27,['bean':(meetingInstance),'var':("error")],3)
-printHtmlPart(19)
-})
-invokeTag('hasErrors','g',29,['bean':(meetingInstance)],2)
-printHtmlPart(12)
-createTagBody(2, {->
-printHtmlPart(20)
-invokeTag('hiddenField','g',31,['name':("version"),'value':(meetingInstance?.version)],-1)
-printHtmlPart(21)
-invokeTag('render','g',33,['template':("form")],-1)
-printHtmlPart(22)
-invokeTag('actionSubmit','g',36,['class':("save"),'action':("update"),'value':(message(code: 'default.button.update.label', default: 'Update'))],-1)
-printHtmlPart(23)
 })
 invokeTag('form','g',38,['url':([resource:meetingInstance, action:'update']),'method':("PUT")],2)
-printHtmlPart(24)
+printHtmlPart(13)
 })
 invokeTag('captureBody','sitemesh',40,[:],1)
-printHtmlPart(25)
+printHtmlPart(14)
 }
 public static final Map JSP_TAGS = new HashMap()
 protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1407539700344L
+public static final long LAST_MODIFIED = 1414897630928L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'

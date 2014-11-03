@@ -35,74 +35,68 @@ createTagBody(1, {->
 printHtmlPart(4)
 invokeTag('message','g',11,['code':("default.link.skip.label"),'default':("Skip to content&hellip;")],-1)
 printHtmlPart(5)
-expressionOut.print(createLink(uri: '/'))
+expressionOut.print(createLink(uri: '/expense'))
 printHtmlPart(6)
-invokeTag('message','g',14,['code':("default.home.label")],-1)
+invokeTag('message','g',14,['code':("default.list.label"),'args':([entityName])],-1)
 printHtmlPart(7)
-createTagBody(2, {->
-invokeTag('message','g',15,['code':("default.list.label"),'args':([entityName])],-1)
-})
-invokeTag('link','g',15,['class':("list"),'action':("index")],2)
+expressionOut.print(createLink(uri: '/expense/create'))
+printHtmlPart(6)
+invokeTag('message','g',15,['code':("default.new.label"),'args':([entityName])],-1)
 printHtmlPart(8)
-createTagBody(2, {->
-invokeTag('message','g',16,['code':("default.new.label"),'args':([entityName])],-1)
-})
-invokeTag('link','g',16,['class':("create"),'action':("create")],2)
+invokeTag('message','g',19,['code':("default.show.label"),'args':([entityName])],-1)
 printHtmlPart(9)
-invokeTag('message','g',20,['code':("default.show.label"),'args':([entityName])],-1)
-printHtmlPart(10)
 if(true && (flash.message)) {
-printHtmlPart(11)
+printHtmlPart(10)
 expressionOut.print(flash.message)
+printHtmlPart(11)
+}
 printHtmlPart(12)
-}
-printHtmlPart(13)
 if(true && (expenseInstance?.description)) {
+printHtmlPart(13)
+invokeTag('message','g',27,['code':("expense.description.label"),'default':("Description")],-1)
 printHtmlPart(14)
-invokeTag('message','g',28,['code':("expense.description.label"),'default':("Description")],-1)
+invokeTag('fieldValue','g',29,['bean':(expenseInstance),'field':("description")],-1)
 printHtmlPart(15)
-invokeTag('fieldValue','g',30,['bean':(expenseInstance),'field':("description")],-1)
-printHtmlPart(16)
 }
+printHtmlPart(16)
+if(true && (expenseInstance?.value.round(2))) {
 printHtmlPart(17)
-if(true && (expenseInstance?.value)) {
+invokeTag('message','g',36,['code':("expense.value.label"),'default':("Value")],-1)
 printHtmlPart(18)
-invokeTag('message','g',37,['code':("expense.value.label"),'default':("Value")],-1)
-printHtmlPart(19)
-invokeTag('fieldValue','g',39,['bean':(expenseInstance),'field':("value")],-1)
-printHtmlPart(16)
+invokeTag('fieldValue','g',38,['bean':(expenseInstance),'field':("value")],-1)
+printHtmlPart(15)
 }
-printHtmlPart(17)
+printHtmlPart(16)
 if(true && (expenseInstance?.date)) {
+printHtmlPart(19)
+invokeTag('message','g',45,['code':("expense.date.label"),'default':("Date")],-1)
 printHtmlPart(20)
-invokeTag('message','g',46,['code':("expense.date.label"),'default':("Date")],-1)
-printHtmlPart(21)
-invokeTag('formatDate','g',48,['format':("dd/MM/yy"),'date':(donationInstance?.date)],-1)
-printHtmlPart(16)
+invokeTag('formatDate','g',47,['format':("dd/MM/yy"),'date':(donationInstance?.date)],-1)
+printHtmlPart(15)
 }
-printHtmlPart(22)
+printHtmlPart(21)
 createTagBody(2, {->
-printHtmlPart(23)
+printHtmlPart(22)
 createTagBody(3, {->
-invokeTag('message','g',56,['code':("default.button.edit.label"),'default':("Edit")],-1)
+invokeTag('message','g',55,['code':("default.button.edit.label"),'default':("Edit")],-1)
 })
-invokeTag('link','g',56,['class':("edit"),'action':("edit"),'resource':(expenseInstance)],3)
+invokeTag('link','g',55,['class':("edit"),'action':("edit"),'resource':(expenseInstance)],3)
+printHtmlPart(23)
+invokeTag('actionSubmit','g',56,['class':("delete"),'action':("delete"),'value':(message(code: 'default.button.delete.label', default: 'Delete')),'onclick':("return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');")],-1)
 printHtmlPart(24)
-invokeTag('actionSubmit','g',57,['class':("delete"),'action':("delete"),'value':(message(code: 'default.button.delete.label', default: 'Delete')),'onclick':("return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');")],-1)
+})
+invokeTag('form','g',58,['url':([resource:expenseInstance, action:'delete']),'method':("DELETE")],2)
 printHtmlPart(25)
 })
-invokeTag('form','g',59,['url':([resource:expenseInstance, action:'delete']),'method':("DELETE")],2)
+invokeTag('captureBody','sitemesh',60,[:],1)
 printHtmlPart(26)
-})
-invokeTag('captureBody','sitemesh',61,[:],1)
-printHtmlPart(27)
 }
 public static final Map JSP_TAGS = new HashMap()
 protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1409015390052L
+public static final long LAST_MODIFIED = 1409702835811L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'

@@ -10,33 +10,52 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<title><g:layoutTitle default="KLWCIn Network"/></title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="shortcut icon" href="${assetPath(src: 'Icon.png')}" type="image/x-icon">
-		<link rel="apple-touch-icon" href="${assetPath(src: 'Icon.png')}">
-		<link rel="apple-touch-icon" sizes="114x114" href="${assetPath(src: 'Icon.png')}">
-  		<asset:stylesheet src="application.css"/>
+		<link rel="shortcut icon" href="${assetPath(src: 'icon.png')}" type="image/x-icon">
+		<link rel="apple-touch-icon" href="${assetPath(src: 'icon.png')}">
+		<link rel="apple-touch-icon" sizes="114x114" href="${assetPath(src: 'icon.png')}">
+		
+		<!-- Application javascript -->
 		<asset:javascript src="application.js"/>
+		
+		<!-- Bootstrap core CSS -->
+		<asset:stylesheet src="bootstrap.css"/>
+		
+		<!-- Custom styles for this template -->
+		<asset:stylesheet src="application.css"/>
+		<asset:stylesheet src="footer.css"/>
+		<asset:stylesheet src="font-awesome.min.css"/>
+		
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+			<asset:javascript src="html5shiv.js"/>
+			<asset:javascript src="respond.min.js"/>
+		<![endif]-->
+		
 		<g:layoutHead/>
 	</head>
-	<body>
-		<div id="grailsLogo" role="banner">
-			<a href="http://www.cin.ufpe.br/~jgs/klwcin.html"><asset:image src="logo_full.png" alt="KLWCIn logo"/>KLWCIn Network</a>
-			<div class="nav" role="navigation">
-				<g:form controller="user" action="edit" id="${session.SPRING_SECURITY_CONTEXT.authentication.principal.id}">
-					<button formaction="${createLink(uri: '/')}">Home</button>
-					<button formaction="${createLink(uri: '/user')}">Users</button>
-					<button formaction="${createLink(uri: '/meeting')}">Meetings</button>
-					<button formaction="${createLink(uri: '/finance')}">Finances</button>
-					<button formaction="${createLink(uri: '/j_spring_security_logout')}" style="float: right;">Logout</button>
-					<button style="float: right; margin-right: 4px;">
-					${User.get(session.SPRING_SECURITY_CONTEXT.authentication.principal.id)}
-					(${session.SPRING_SECURITY_CONTEXT.authentication.principal.username})
-					</button>
-					<!-- <button formaction="${createLink(uri: '/login/auth')}" style="float: right;">Login</button> -->
-				</g:form>
+	<body onload="init('${resource()}'); setActive('${controllerName}');">
+		<!-- HEADER -->
+			<g:render template="/layouts/header" model="systemConfigurationInstance: network.klwcin.configuration.SystemConfiguration.getConfig()" /> <!-- systemConfigurations -->
+		<!-- / HEADER -->
+		
+		<!-- NAVIGATION -->
+			<g:render template="/layouts/navigation" />
+		<!-- / NAVIGATION -->
+		
+		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
+		<g:layoutBody/>
+		
+		<!-- FOOTER -->
+		<div id="footer">
+			<div class="container">
+				<p class="copy">Copyright &copy; 2014 KLWCIn. All rights reserved.</p>
 			</div>
 		</div>
-		<g:layoutBody/>
-		<div class="footer" role="contentinfo"></div>
-		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
+		<!-- / FOOTER -->
+		
+		<asset:javascript src="klwcin.js"/>
+		<asset:javascript src="jquery.js"/>
+		<asset:javascript src="jquery.mask.js"/>
+		<asset:javascript src="bootstrap.min.js"/>
 	</body>
 </html>

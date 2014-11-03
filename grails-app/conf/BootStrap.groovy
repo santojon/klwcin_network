@@ -1,3 +1,5 @@
+import grails.util.Environment
+
 import org.codehaus.groovy.grails.commons.GrailsApplication
 
 class BootStrap {
@@ -6,9 +8,19 @@ class BootStrap {
 	
     def init = { servletContext ->
 		
-		//service for fill up the database with the basic users, roles etc
 		def applicationContext = grailsApplication.mainContext
-		applicationContext.databaseService.fill()
+		
+		if (Environment.current == Environment.DEVELOPMENT) {
+			
+			//services for fill up the database with the basic users, roles etc
+			applicationContext.databaseService.fill()
+		} else if (Environment.current == Environment.TEST) {
+			
+		} else if (Environment.current == Environment.PRODUCTION) {
+		
+			//service for fill up the database with the basic users, roles etc
+			applicationContext.databaseService.fill()
+		}
     }
     def destroy = {
     }

@@ -5,7 +5,7 @@ import grails.plugin.springsecurity.annotation.Secured;
 @Secured(['ROLE_ADMIN', 'ROLE_USER', 'ROLE_NONE'])
 class FinanceController {
 
-	def balance = 0
+	Double balance = 0
 	def lastDonations = []
 	def allDonations = []
 	def lastExpenses = []

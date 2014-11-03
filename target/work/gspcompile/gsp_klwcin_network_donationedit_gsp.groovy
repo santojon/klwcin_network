@@ -34,67 +34,63 @@ createTagBody(1, {->
 printHtmlPart(3)
 invokeTag('message','g',10,['code':("default.link.skip.label"),'default':("Skip to content&hellip;")],-1)
 printHtmlPart(4)
-expressionOut.print(createLink(uri: '/'))
+createTagBody(2, {->
+invokeTag('message','g',13,['code':("default.list.label"),'args':([entityName])],-1)
+})
+invokeTag('link','g',13,['class':("list"),'action':("index")],2)
 printHtmlPart(5)
-invokeTag('message','g',13,['code':("default.home.label")],-1)
+createTagBody(2, {->
+invokeTag('message','g',14,['code':("default.new.label"),'args':([entityName])],-1)
+})
+invokeTag('link','g',14,['class':("create"),'action':("create")],2)
 printHtmlPart(6)
-createTagBody(2, {->
-invokeTag('message','g',14,['code':("default.list.label"),'args':([entityName])],-1)
-})
-invokeTag('link','g',14,['class':("list"),'action':("index")],2)
+invokeTag('message','g',18,['code':("default.edit.label"),'args':([entityName])],-1)
 printHtmlPart(7)
-createTagBody(2, {->
-invokeTag('message','g',15,['code':("default.new.label"),'args':([entityName])],-1)
-})
-invokeTag('link','g',15,['class':("create"),'action':("create")],2)
-printHtmlPart(8)
-invokeTag('message','g',19,['code':("default.edit.label"),'args':([entityName])],-1)
-printHtmlPart(9)
 if(true && (flash.message)) {
-printHtmlPart(10)
+printHtmlPart(8)
 expressionOut.print(flash.message)
+printHtmlPart(9)
+}
+printHtmlPart(10)
+createTagBody(2, {->
 printHtmlPart(11)
-}
-printHtmlPart(12)
-createTagBody(2, {->
-printHtmlPart(13)
 createTagBody(3, {->
-printHtmlPart(14)
-if(true && (error in org.springframework.validation.FieldError)) {
-printHtmlPart(15)
-expressionOut.print(error.field)
-printHtmlPart(16)
-}
-printHtmlPart(17)
-invokeTag('message','g',26,['error':(error)],-1)
-printHtmlPart(18)
-})
-invokeTag('eachError','g',27,['bean':(donationInstance),'var':("error")],3)
-printHtmlPart(19)
-})
-invokeTag('hasErrors','g',29,['bean':(donationInstance)],2)
 printHtmlPart(12)
+if(true && (error in org.springframework.validation.FieldError)) {
+printHtmlPart(13)
+expressionOut.print(error.field)
+printHtmlPart(14)
+}
+printHtmlPart(15)
+invokeTag('message','g',25,['error':(error)],-1)
+printHtmlPart(16)
+})
+invokeTag('eachError','g',26,['bean':(donationInstance),'var':("error")],3)
+printHtmlPart(17)
+})
+invokeTag('hasErrors','g',28,['bean':(donationInstance)],2)
+printHtmlPart(10)
 createTagBody(2, {->
+printHtmlPart(18)
+invokeTag('hiddenField','g',30,['name':("version"),'value':(donationInstance?.version)],-1)
+printHtmlPart(19)
+invokeTag('render','g',32,['template':("form")],-1)
 printHtmlPart(20)
-invokeTag('hiddenField','g',31,['name':("version"),'value':(donationInstance?.version)],-1)
+invokeTag('actionSubmit','g',35,['class':("save"),'action':("update"),'value':(message(code: 'default.button.update.label', default: 'Update'))],-1)
 printHtmlPart(21)
-invokeTag('render','g',33,['template':("form")],-1)
+})
+invokeTag('form','g',37,['url':([resource:donationInstance, action:'update']),'method':("PUT")],2)
 printHtmlPart(22)
-invokeTag('actionSubmit','g',36,['class':("save"),'action':("update"),'value':(message(code: 'default.button.update.label', default: 'Update'))],-1)
+})
+invokeTag('captureBody','sitemesh',39,[:],1)
 printHtmlPart(23)
-})
-invokeTag('form','g',38,['url':([resource:donationInstance, action:'update']),'method':("PUT")],2)
-printHtmlPart(24)
-})
-invokeTag('captureBody','sitemesh',40,[:],1)
-printHtmlPart(25)
 }
 public static final Map JSP_TAGS = new HashMap()
 protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1409014901699L
+public static final long LAST_MODIFIED = 1409703071266L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'

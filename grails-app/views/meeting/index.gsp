@@ -1,4 +1,3 @@
-
 <%@ page import="network.klwcin.business.Meeting" %>
 <!DOCTYPE html>
 <html>
@@ -8,54 +7,110 @@
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
 	<body>
-		<a href="#list-meeting" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
-			<ul>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-			</ul>
-		</div>
-		<div id="list-meeting" class="content scaffold-list" role="main">
-			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
-			<g:if test="${flash.message}">
-				<div class="message" role="status">${flash.message}</div>
-			</g:if>
-			<table>
-			<thead>
-					<tr>
-					
-						<g:sortableColumn property="place" title="${message(code: 'meeting.place.label', default: 'Place')}" />
-					
-						<g:sortableColumn property="description" title="${message(code: 'meeting.description.label', default: 'Description')}" />
-					
-						<g:sortableColumn property="type" title="${message(code: 'meeting.type.label', default: 'Type')}" />
-					
-						<g:sortableColumn property="date" title="${message(code: 'meeting.date.label', default: 'Date')}" />
-					
-						<th><g:message code="meeting.creator.label" default="Creator" /></th>
-					
-					</tr>
-				</thead>
-				<tbody>
-				<g:each in="${meetingInstanceList}" status="i" var="meetingInstance">
-					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
-						<td><g:link action="show" id="${meetingInstance.id}">${fieldValue(bean: meetingInstance, field: "place")}</g:link></td>
-					
-						<td>${fieldValue(bean: meetingInstance, field: "description")}</td>
-					
-						<td>${fieldValue(bean: meetingInstance, field: "type")}</td>
-					
-						<td><g:formatDate format="dd/MM/yy - HH:mm" date="${meetingInstance.date}" /></td>
-					
-						<td>${fieldValue(bean: meetingInstance, field: "creator")}</td>
-					
-					</tr>
-				</g:each>
-				</tbody>
-			</table>
-			<div class="pagination">
-				<g:paginate total="${meetingInstanceCount ?: 0}" />
+		<div id="list-meeting" class="content" role="main">
+	
+		<!-- USER LIST PAGE CONTENT -->
+		<div class="main-content" role="main">
+			
+			<!-- TITLE -->
+			<h1 class="page-title" id="title_index" >Meetings</h1>
+			<!-- / TITLE -->
+		
+			<!-- BUTTONS / SEARCH -->
+			<div class="action-bar-top">
+				<g:if test="${'[ROLE_ADMIN]' in session.SPRING_SECURITY_CONTEXT.authentication.principal.authorities.toString()}">			
+				<div class="pull-left">
+					<g:form url="[controller: 'meeting', action:'create']" method="POST" id="create_form" >
+						<button type="submit" id="btn_create" class="btn btn-danger create-form-button">
+							<span class="fa fa-plus"></span> Add
+						</button>
+					</g:form>
+				</div>
+				</g:if>
+				
+				<div class="search-filter">
+				<g:form method="GET">
+					<input type="text" class="form-control" placeholder="Search..." id="search" name="search" value="${params.search}">
+					<button class="btn btn-danger" type="submit" id="searchButton">
+						<span class="fa fa-search"></span>
+					</button>
+					</g:form>
+				</div>
+				<div class="clearfix"></div>
 			</div>
+			<!-- / BUTTONS / SEARCH -->
+			
+			<!-- PAGE MESSAGES -->
+			<g:render template="/general/show-flash-messages" />
+			<!-- / PAGE MESSAGES -->
+			
+			<!-- PAGINATION TOP -->
+			<g:render template="/general/pagination-header" model="['myList':meetingInstanceList, 'paginationId':'pagination_top']"/>
+			<!-- / PAGINATION TOP -->
+			
+			<input type="hidden" name="totalCount" id="totalCount" value="${userInstanceList?.size() ?: 0}" />
+			
+			<!-- GRID -->
+			<div class="col-lg-12 padding0">
+			
+				<div class="table-responsive">
+				
+					<table class="table grid table-hover table-striped">
+						<thead>
+							<tr>
+								<g:sortableColumn property="place" title="Place" params="[search: params.search]"/>
+								<g:sortableColumn property="description" title="Description" params="[search: params.search]"/>
+								<g:sortableColumn property="type" title="Type" params="[search: params.search]"/>
+								<g:sortableColumn property="date" title="Date" params="[search: params.search]"/>
+								<g:sortableColumn property="creator" title="Creator" params="[search: params.search]"/>
+								<th class="width30">&nbsp;</th>
+							</tr>
+						</thead>
+						<tbody>
+						
+							<!-- NO RECORD MESSAGE -->
+							<g:if test="${meetingInstanceList == null}">
+							<tr class="tr-empty-grid">
+								<td colspan="5">Empty list</td>
+								<th class="width30">&nbsp;</th>
+							</tr>
+							</g:if>
+							<!-- NO RECORD MESSAGE -->
+							
+							<g:each in="${meetingInstanceList}" status="i" var="meetingInstance">
+							<tr id="line_${i}">
+								<td><span class="block" title="Edit meeting / participate" onClick="editMeeting('${meetingInstance.id}');" >${fieldValue(bean: meetingInstance, field: "place")}</span></td>
+								<td><span class="block" title="Edit meeting / participate" onClick="editMeeting('${meetingInstance.id}');" >${fieldValue(bean: meetingInstance, field: "description")}</span></td>
+								<td><span class="block" title="Edit meeting / participate" onClick="editMeeting('${meetingInstance.id}');" >${fieldValue(bean: meetingInstance, field: "type")}</span></td>
+								<td><span class="block" title="Edit meeting / participate" onClick="editMeeting('${meetingInstance.id}');" ><g:formatDate format="dd/MM/yy - HH:mm" date="${meetingInstance.date}" /></span></td>
+								<td><span class="block" title="Edit meeting / participate" onClick="editMeeting('${meetingInstance.id}');" >${fieldValue(bean: meetingInstance, field: "creator")}</span></td>
+								<td>
+								<g:if test="${'[ROLE_ADMIN]' in session.SPRING_SECURITY_CONTEXT.authentication.principal.authorities.toString()}">
+									<g:form url="[controller: 'meeting', resource:meetingInstance, action:'delete']" method="DELETE" id="remove-form-${meetingInstance.id}" >
+										<a href="#" title="Remove Meeting" id="btn_remove" onClick="getRemoveMeetingModalByPlaceAndDate('${meetingInstance.place}', '${meetingInstance.date}', ${meetingInstance.id})" class="a-icon" data-toggle="modal"><span class="fa fa-trash"></span></a>
+									</g:form>
+								</g:if>
+								</td>
+							</tr>
+							</g:each>
+						</tbody>
+					</table>
+				</div>
+				
+			</div>
+			<!-- GRID -->
+			
+			<!-- PAGINATION BOTTOM -->
+			<g:render template="/general/pagination-header" model="['myList':meetingInstanceList, 'paginationId':'pagination_bottom']"/>
+			<!-- / PAGINATION BOTTOM -->
+		
+		</div>
+		<!-- / USER LIST PAGE CONTENT -->
+		
+		<!-- DELETE MODAL -->
+		<g:render template="modal-confirm-remove-meeting" />
+		<!-- / DELETE MODAL -->
+		
 		</div>
 	</body>
 </html>

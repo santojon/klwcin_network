@@ -1,145 +1,102 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="layout" content="main"/>
-		<title>Finances</title>
-		<style type="text/css" media="screen">
-			#status {
-				background-color: #eee;
-				border: .2em solid #fff;
-				margin: 2em 2em 1em;
-				padding: 1em;
-				width: 12em;
-				float: left;
-				-moz-box-shadow: 0px 0px 1.25em #ccc;
-				-webkit-box-shadow: 0px 0px 1.25em #ccc;
-				box-shadow: 0px 0px 1.25em #ccc;
-				-moz-border-radius: 0.6em;
-				-webkit-border-radius: 0.6em;
-				border-radius: 0.6em;
-			}
-
-			.ie6 #status {
-				display: inline; /* float double margin fix http://www.positioniseverything.net/explorer/doubled-margin.html */
-			}
-
-			#status ul {
-				font-size: 0.9em;
-				list-style-type: none;
-				margin-bottom: 0.6em;
-				padding: 0;
-			}
-
-			#status li {
-				line-height: 1.3;
-			}
-
-			#status h1 {
-				text-transform: uppercase;
-				font-size: 1.1em;
-				margin: 0 0 0.3em;
-			}
-
-			#page-body {
-				margin: 2em 1em 1.25em 18em;
-			}
-
-			h2 {
-				margin-top: 1em;
-				margin-bottom: 0.3em;
-				font-size: 1em;
-			}
-
-			p {
-				line-height: 1.5;
-				margin: 0.25em 0;
-			}
-
-			#controller-list ul {
-				list-style-position: inside;
-			}
-
-			#controller-list li {
-				line-height: 1.3;
-				list-style-position: inside;
-				margin: 0.25em 0;
-			}
-
-			@media screen and (max-width: 480px) {
-				#status {
-					display: none;
-				}
-
-				#page-body {
-					margin: 0 1em 1em;
-				}
-
-				#page-body h1 {
-					margin-top: 0;
-				}
-			}
-		</style>
+		<meta name="layout" content="main">
+		<title>Finances Balance</title>
 	</head>
 	<body>
-		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
-			<g:form controller="expense" action="create">
-					<button style="float: right;">Register Expense</button>
-					<button formaction="${createLink(controller: 'donation', action: 'create')}">Register Donation</button>
-			</g:form>
+		<div id="finances" class="content" role="main">
+	
+		<!-- FINANCES BALANCE PAGE CONTENT -->
+		<div class="main-content" role="main">
+			
+			<!-- TITLE -->
+			<h1 class="page-title" id="title_index" >Finances balance</h1>
+			<!-- / TITLE -->
+		
+			<!-- BUTTONS -->
+			<div class="action-bar-top">			
+				<div class="pull-left">
+				<g:form url="[controller: 'donation', action:'create']" method="POST" id="create_form" >
+					<button type="submit" id="btn_create_donation" class="btn btn-danger create-form-button">
+						<span class="fa fa-plus"></span> Add Donation
+					</button>
+				</g:form>
+				</div>
+				
+				<div class="pull-right">
+				<g:form url="[controller: 'expense', action:'create']" method="POST" id="create_form" >
+					<button type="submit" id="btn_create_expense" class="btn btn-danger create-form-button">
+						<span class="fa fa-plus"></span> Add Expense
+					</button>
+				</g:form>
+				</div>
+			</div>
+			<!-- / BUTTONS -->
+			
+			<!-- GRID -->
+			<div class="col-lg-12 padding0">
+			
+				<div class="table-responsive">
+				
+					<table class="table grid table-hover table-striped">
+						<thead>
+							<tr>
+								<g:sortableColumn property="donator" title="Donator or Expenser"/>
+								<g:sortableColumn property="type" title="Type"/>
+								<g:sortableColumn property="description" title="Description"/>
+								<g:sortableColumn property="date" title="Date"/>
+								<g:sortableColumn property="total" title="Value R\$"/>
+								<th class="width30">&nbsp;</th>
+							</tr>
+						</thead>
+						<tbody>
+						
+							<!-- NO RECORD MESSAGE -->
+							<g:if test="${donations.size() == 0 && expenses.size() == 0}">
+							<tr class="tr-empty-grid">
+								<td colspan="5">Empty list</td>
+								<th class="width30">&nbsp;</th>
+							</tr>
+							</g:if>
+							<!-- NO RECORD MESSAGE -->
+							
+							<g:each in="${donations}" status="i" var="donaionInstance">
+							<tr id="line_${i}">
+								<td><span class="block" title="Donation">${fieldValue(bean: donationInstance, field: "donator")}</span></td>
+								<td><span class="block" title="Donation">${fieldValue(bean: donationInstance, field: "type")}</span></td>
+								<td><span class="block" title="Donation">${fieldValue(bean: donationInstance, field: "description")}</span></td>
+								<td><span class="block" title="Donation"><g:formatDate format="dd/MM/yy" date="${donationInstance.date}" /></span></td>
+								<td><span class="block" title="Donation">${donationInstance.value.round(2)}</span></td>
+							</tr>
+							</g:each>
+							
+							<g:each in="${expenses}" status="i" var="expenseInstance">
+							<tr id="line_${i}">
+								<td><span class="block" title="Expense">KLWCIn</span></td>
+								<td><span class="block" title="Expense">Expense</span></td>
+								<td><span class="block" title="Expense">${fieldValue(bean: expenseInstance, field: "description")}</span></td>
+								<td><span class="block" title="Expense"><g:formatDate format="dd/MM/yy" date="${expenseInstance.date}" /></span></td>
+								<td><span class="block" title="Expense">${expenseInstance.value.round(2)}</span></td>
+							</tr>
+							</g:each>
+						</tbody>
+					</table>
+				</div>
+				
+			</div>
+			<!-- GRID -->
+			
 		</div>
-		<div>
-			<table>
-			<thead>
-					<tr>
-						<g:sortableColumn property="next" title="${message(code: 'Last Donations and Expenses')}" />
-						<g:sortableColumn property="next1" title="${message(code: ' ')}" />
-						<g:sortableColumn property="next2" title="${message(code: ' ')}" />
-						<g:sortableColumn property="next2" title="${message(code: ' ')}" />
-						<g:sortableColumn property="next2" title="${message(code: ' ')}" />
-					</tr>
-					<tr>
-					
-						<g:sortableColumn property="donator" title="${message(code: 'Donator or Expenser')}" />
-						<g:sortableColumn property="type" title="${message(code: 'donation.type.label', default: 'Type')}" />
-						<g:sortableColumn property="description" title="${message(code: 'donation.description.label', default: 'Description')}" />
-						<g:sortableColumn property="date" title="${message(code: 'donation.date.label', default: 'Date')}" />						
-						<g:sortableColumn property="total" title="${message(code: 'Value R$')}" />
-					
-					</tr>
-				</thead>
-				<tbody>
-				<g:each in="${donations}" status="i" var="donationInstance">
-					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
-						<td><g:link action="showDonation" id="${donationInstance.id}">${fieldValue(bean: donationInstance, field: "donator")}</g:link></td>
-						<td>Donation - ${fieldValue(bean: donationInstance, field: "type")}</td>
-						<td>${fieldValue(bean: donationInstance, field: "description")}</td>
-						<td><g:formatDate format="dd/MM/yy" date="${donationInstance.date}" /></td>
-						<td>${donationInstance.value.round(2)}</td>
-						
-					</tr>
-				</g:each>
-				<g:each in="${expenses}" status="i" var="expenseInstance">
-					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
-						<td><g:link action="showExpense" id="${expenseInstance.id}">KLWCIn</g:link></td>
-						<td>Expense</td>
-						<td>${fieldValue(bean: expenseInstance, field: "description")}</td>
-						<td><g:formatDate format="dd/MM/yy" date="${expenseInstance.date}" /></td>
-						<td>${expenseInstance.value.round(2)}</td>
-						
-					</tr>
-				</g:each>
-				<tr>
-					<g:sortableColumn property="next1" title="${message(code: ' ')}" />
-					<g:sortableColumn property="next2" title="${message(code: ' ')}" />
-					<g:sortableColumn property="next2" title="${message(code: ' ')}" />
-					<g:sortableColumn property="next2" title="${message(code: 'Balance:')}" />
-					<td>${balance.round(2)}</td>
-				</tr>
-				</tbody>
-			</table>
+		
+			<!-- Action -->
+			<div class="modal-footer">
+				<div class="page">
+					<td class="pull-right">Balance: </td>
+					<td class="pull-right">${balance.round(2)}</td>
+				</div>
+			</div>
+			<!-- / Action -->
 		</div>
 	</body>
 </html>

@@ -38,6 +38,9 @@ class DatabaseService {
 		def userUser2 = new User(name:'Raphael Tulyo', email:'rtsd@cin.ufpe.br', type:'Common', username:'rtsd' , password:'rtsd')
 		userUser2.save(flush: true)
 		
+		def userUser3 = new User(name:'Jose Antonio', email:'jas4@cin.ufpe.br', type:'Common', username:'jas4' , password:'jas4')
+		userUser3.save(flush: true)
+		
 		def noneUser = new User(name:'Helder Felix', email:'hpff@cin.ufpe.br', type:'Aspirant', username:'hpff' , password:'hpff')
 		noneUser.save(flush: true)
 		
@@ -50,6 +53,7 @@ class DatabaseService {
 		
 		UserRole.create userUser, userRole, true
 		UserRole.create userUser2, userRole, true
+		UserRole.create userUser3, userRole, true
 		
 		UserRole.create noneUser, noneRole, true
     }
