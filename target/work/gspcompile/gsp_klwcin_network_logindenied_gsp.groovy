@@ -28,10 +28,10 @@ invokeTag('captureHead','sitemesh',4,[:],1)
 printHtmlPart(1)
 createTagBody(1, {->
 printHtmlPart(2)
-invokeTag('message','g',8,['code':("springSecurity.denied.message")],-1)
+invokeTag('message','g',10,['code':("springSecurity.denied.message")],-1)
 printHtmlPart(3)
 })
-invokeTag('captureBody','sitemesh',10,[:],1)
+invokeTag('captureBody','sitemesh',13,[:],1)
 printHtmlPart(0)
 }
 public static final Map JSP_TAGS = new HashMap()
@@ -39,9 +39,15 @@ protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1408197521073L
+public static final long LAST_MODIFIED = 1415029940491L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'
 public static final String TAGLIB_CODEC = 'none'
 }
+
+@org.codehaus.groovy.grails.web.transform.LineNumber(
+	lines = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 6, 10, 10, 10, 10, 13, 13, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+	sourceName = "denied.gsp"
+)
+class ___LineNumberPlaceholder { }

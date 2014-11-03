@@ -31,64 +31,35 @@ invokeTag('captureHead','sitemesh',7,[:],1)
 printHtmlPart(2)
 createTagBody(1, {->
 printHtmlPart(3)
-invokeTag('message','g',9,['code':("default.link.skip.label"),'default':("Skip to content&hellip;")],-1)
+invokeTag('message','g',10,['code':("default.create.label"),'args':([entityName])],-1)
 printHtmlPart(4)
-expressionOut.print(createLink(uri: '/'))
+createTagBody(2, {->
 printHtmlPart(5)
-invokeTag('message','g',12,['code':("default.home.label")],-1)
+invokeTag('render','g',16,['template':("/general/show-flash-messages")],-1)
 printHtmlPart(6)
-createTagBody(2, {->
-invokeTag('message','g',13,['code':("default.list.label"),'args':([entityName])],-1)
-})
-invokeTag('link','g',13,['class':("list"),'action':("index")],2)
+invokeTag('render','g',20,['template':("form")],-1)
 printHtmlPart(7)
-invokeTag('message','g',17,['code':("default.create.label"),'args':([entityName])],-1)
+})
+invokeTag('form','g',31,['url':([resource:userInstance, action:'save'])],2)
 printHtmlPart(8)
-if(true && (flash.message)) {
+})
+invokeTag('captureBody','sitemesh',33,[:],1)
 printHtmlPart(9)
-expressionOut.print(flash.message)
-printHtmlPart(10)
-}
-printHtmlPart(11)
-createTagBody(2, {->
-printHtmlPart(12)
-createTagBody(3, {->
-printHtmlPart(13)
-if(true && (error in org.springframework.validation.FieldError)) {
-printHtmlPart(14)
-expressionOut.print(error.field)
-printHtmlPart(15)
-}
-printHtmlPart(16)
-invokeTag('message','g',24,['error':(error)],-1)
-printHtmlPart(17)
-})
-invokeTag('eachError','g',25,['bean':(userInstance),'var':("error")],3)
-printHtmlPart(18)
-})
-invokeTag('hasErrors','g',27,['bean':(userInstance)],2)
-printHtmlPart(11)
-createTagBody(2, {->
-printHtmlPart(19)
-invokeTag('render','g',30,['template':("form")],-1)
-printHtmlPart(20)
-invokeTag('submitButton','g',33,['name':("create"),'class':("save"),'value':(message(code: 'default.button.create.label', default: 'Create'))],-1)
-printHtmlPart(21)
-})
-invokeTag('form','g',35,['url':([resource:userInstance, action:'save'])],2)
-printHtmlPart(22)
-})
-invokeTag('captureBody','sitemesh',37,[:],1)
-printHtmlPart(23)
 }
 public static final Map JSP_TAGS = new HashMap()
 protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1407282087851L
+public static final long LAST_MODIFIED = 1415029940615L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'
 public static final String TAGLIB_CODEC = 'none'
 }
+
+@org.codehaus.groovy.grails.web.transform.LineNumber(
+	lines = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 4, 4, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 8, 10, 10, 10, 10, 16, 16, 16, 16, 20, 20, 31, 31, 31, 33, 33, 33, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+	sourceName = "create.gsp"
+)
+class ___LineNumberPlaceholder { }
