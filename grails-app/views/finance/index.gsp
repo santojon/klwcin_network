@@ -1,3 +1,5 @@
+<%@ page import="network.klwcin.business.Donation" %>
+<%@ page import="network.klwcin.business.Expense" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -15,22 +17,24 @@
 			<!-- / TITLE -->
 		
 			<!-- BUTTONS -->
-			<div class="action-bar-top">			
-				<div class="pull-left">
-				<g:form url="[controller: 'donation', action:'create']" method="POST" id="create_form" >
-					<button type="submit" id="btn_create_donation" class="btn btn-danger create-form-button">
-						<span class="fa fa-plus"></span> Add Donation
-					</button>
-				</g:form>
-				</div>
-				
-				<div class="pull-right">
-				<g:form url="[controller: 'expense', action:'create']" method="POST" id="create_form" >
-					<button type="submit" id="btn_create_expense" class="btn btn-danger create-form-button">
-						<span class="fa fa-plus"></span> Add Expense
-					</button>
-				</g:form>
-				</div>
+			<div class="action-bar-top">
+				<sec:ifAllGranted roles="ROLE_ADMIN">		
+					<div class="pull-left">
+					<g:form url="[controller: 'donation', action:'create']" method="POST" id="create_donation_form" >
+						<button type="submit" id="btn_create_donation" class="btn btn-danger create-form-button">
+							<span class="fa fa-plus"></span> Add Donation
+						</button>
+					</g:form>
+					</div>
+					
+					<div class="pull-right">
+					<g:form url="[controller: 'expense', action:'create']" method="POST" id="create_expense_form" >
+						<button type="submit" id="btn_create_expense" class="btn btn-danger create-form-button">
+							<span class="fa fa-plus"></span> Add Expense
+						</button>
+					</g:form>
+					</div>
+				</sec:ifAllGranted>
 			</div>
 			<!-- / BUTTONS -->
 			
@@ -61,23 +65,25 @@
 							</g:if>
 							<!-- NO RECORD MESSAGE -->
 							
-							<g:each in="${donations}" status="i" var="donaionInstance">
+							<g:each in="${donations}" status="i" var="donationInstance">
 							<tr id="line_${i}">
-								<td><span class="block" title="Donation">${fieldValue(bean: donationInstance, field: "donator")}</span></td>
-								<td><span class="block" title="Donation">${fieldValue(bean: donationInstance, field: "type")}</span></td>
-								<td><span class="block" title="Donation">${fieldValue(bean: donationInstance, field: "description")}</span></td>
-								<td><span class="block" title="Donation"><g:formatDate format="dd/MM/yy" date="${donationInstance.date}" /></span></td>
-								<td><span class="block" title="Donation">${donationInstance.value.round(2)}</span></td>
+								<td><span class="block" title="Donation" onClick="editDonation('${donationInstance.id}');">${fieldValue(bean: donationInstance, field: "donator")}</span></td>
+								<td><span class="block" title="Donation" onClick="editDonation('${donationInstance.id}');">${fieldValue(bean: donationInstance, field: "type")}</span></td>
+								<td><span class="block" title="Donation" onClick="editDonation('${donationInstance.id}');">${fieldValue(bean: donationInstance, field: "description")}</span></td>
+								<td><span class="block" title="Donation" onClick="editDonation('${donationInstance.id}');"><g:formatDate format="dd/MM/yy" date="${donationInstance?.date}" /></span></td>
+								<td><span class="block" title="Donation" onClick="editDonation('${donationInstance.id}');">${donationInstance?.value.round(2)}</span></td>
+								<td class="width30">&nbsp;</td>
 							</tr>
 							</g:each>
 							
 							<g:each in="${expenses}" status="i" var="expenseInstance">
 							<tr id="line_${i}">
-								<td><span class="block" title="Expense">KLWCIn</span></td>
-								<td><span class="block" title="Expense">Expense</span></td>
-								<td><span class="block" title="Expense">${fieldValue(bean: expenseInstance, field: "description")}</span></td>
-								<td><span class="block" title="Expense"><g:formatDate format="dd/MM/yy" date="${expenseInstance.date}" /></span></td>
-								<td><span class="block" title="Expense">${expenseInstance.value.round(2)}</span></td>
+								<td><span class="block" title="Expense" onClick="editExpense('${expenseInstance.id}');">KLWCIn</span></td>
+								<td><span class="block" title="Expense" onClick="editExpense('${expenseInstance.id}');">Expense</span></td>
+								<td><span class="block" title="Expense" onClick="editExpense('${expenseInstance.id}');">${fieldValue(bean: expenseInstance, field: "description")}</span></td>
+								<td><span class="block" title="Expense" onClick="editExpense('${expenseInstance.id}');"><g:formatDate format="dd/MM/yy" date="${expenseInstance?.date}" /></span></td>
+								<td><span class="block" title="Expense" onClick="editExpense('${expenseInstance.id}');">${expenseInstance?.value.round(2)}</span></td>
+								<td class="width30">&nbsp;</td>
 							</tr>
 							</g:each>
 						</tbody>
@@ -97,6 +103,10 @@
 				</div>
 			</div>
 			<!-- / Action -->
+			
+			<asset:javascript src="expense.js"/>
+			<asset:javascript src="donation.js"/>
+			
 		</div>
 	</body>
 </html>

@@ -1,36 +1,63 @@
 package network.klwcin.business
 
 import static org.springframework.http.HttpStatus.*
-import grails.plugin.springsecurity.annotation.Secured;
 import grails.transaction.Transactional
+import grails.plugin.springsecurity.annotation.Secured
 
 @Transactional(readOnly = true)
-@Secured(['ROLE_ADMIN'])
+@Secured(['ROLE_ADMIN', 'ROLE_USER', 'ROLE_NONE'])
 class DonationController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
-	static springSecurityService
+    static allowedMethods = [save: "POST", update: "PUT", delete: ["DELETE", 'GET'], edit: ["PUT", 'GET']]
+	def springSecurityService
 	
+	private redirectToIndex() {
+		redirect (['params': session["donationParams"]] << [action:'index', method:'GET'])
+	}
+	
+	private saveParams() {
+		session["donationParams"] = [
+			'search': params.search,
+			'offset': params.offset,
+			'max': params.max,
+			'sort': params.sort,
+			'order': params.order
+		]
+	}
+
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Donation.list(params), model:[donationInstanceCount: Donation.count()]
-    }
-
-    def show(Donation donationInstance) {
-        respond donationInstance
+		String search = ''
+		
+		saveParams()
+		
+		if (params.search) {
+			search = params.search.replace('*', '%')
+			search = search.replace('?', '_')
+			search = search.trim()
+		}
+		
+		if (params.sort == null || params.sort == '') {
+			params.sort = 'id'
+		}
+		
+		//modify here to implant search by the field you want
+		respond Donation.createCriteria().list(params) {
+			or {
+				like('type', "%${search}%")
+				like('description', "%${search}%")
+			}
+		}, model:[donationInstanceCount: Donation.count()]
     }
 
     def create() {
-		
-		Donation d = new Donation()
-		d.setDonator(springSecurityService.currentUser)
-		
-		//the server is UTC (GMT)
-		d.date = new Date()
-		d.date.hours -= 3
-		
-        respond d
+		if(springSecurityService.currentUser.getType() == "Counselor") {
+			Donation donationInstance = new Donation(params)
+			respond donationInstance
+		} else {
+			flash.message = message(code: "You don't have sufficient privileges to create a new donation!")
+			redirectToIndex()
+		}
     }
 
     @Transactional
@@ -41,7 +68,8 @@ class DonationController {
         }
 
         if (donationInstance.hasErrors()) {
-            respond donationInstance.errors, view:'create'
+            flash.errors = donationInstance.errors
+			redirect action:'create'
             return
         }
 
@@ -49,8 +77,8 @@ class DonationController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'donation.label', default: 'Donation'), donationInstance.id])
-                redirect donationInstance
+                flash.successMessage = message(code: 'default.created.message', args: [message(code: 'donation.label', default: 'Donation'), donationInstance.id])
+                redirectToIndex()
             }
             '*' { respond donationInstance, [status: CREATED] }
         }
@@ -68,7 +96,8 @@ class DonationController {
         }
 
         if (donationInstance.hasErrors()) {
-            respond donationInstance.errors, view:'edit'
+            flash.errors = donationInstance.errors
+            respond donationInstance.errors, view: 'edit'
             return
         }
 
@@ -76,8 +105,8 @@ class DonationController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Donation.label', default: 'Donation'), donationInstance.id])
-                redirect donationInstance
+                flash.successMessage = message(code: 'default.updated.message', args: [message(code: 'Donation.label', default: 'Donation'), donationInstance.id])
+                redirectToIndex()
             }
             '*'{ respond donationInstance, [status: OK] }
         }
@@ -91,15 +120,19 @@ class DonationController {
             return
         }
 
-        donationInstance.delete flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Donation.label', default: 'Donation'), donationInstance.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
+		if(springSecurityService.currentUser.getType() != "Counselor") {
+			flash.message = message(code: "You don't have sufficient privileges to delete donations!")
+		} else {
+	        donationInstance.delete flush:true
+	
+	        request.withFormat {
+	            form multipartForm {
+	                flash.successMessage = message(code: 'default.deleted.message', args: [message(code: 'Donation.label', default: 'Donation'), donationInstance.id])
+	            }
+	            '*'{ render status: NO_CONTENT }
+	        }
+		}
+		redirectToIndex()
     }
 
     protected void notFound() {

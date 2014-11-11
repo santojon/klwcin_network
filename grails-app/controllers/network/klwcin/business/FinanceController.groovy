@@ -1,6 +1,8 @@
 package network.klwcin.business
 
-import grails.plugin.springsecurity.annotation.Secured;
+import grails.plugin.springsecurity.annotation.Secured
+import network.klwcin.business.Donation
+import network.klwcin.business.Expense
 
 @Secured(['ROLE_ADMIN', 'ROLE_USER', 'ROLE_NONE'])
 class FinanceController {
@@ -12,12 +14,11 @@ class FinanceController {
 	def allExpenses = []
 	
     def index() {
-		lastDonations = Donation.findAll("from Donation as d order by d.date", [max: 10])
-		lastExpenses = Expense.findAll("from Expense as e order by e.date", [max: 10])
-		
 		balance = getBalance()
 		
-		[donations: lastDonations, expenses: lastExpenses, balance: balance]
+		[donations: Donation.list(max: 10, sort: 'date'),
+			expenses: Expense.list(max: 10, sort: 'date'),
+				balance: balance]
 	}
 	
 	def getBalance() {

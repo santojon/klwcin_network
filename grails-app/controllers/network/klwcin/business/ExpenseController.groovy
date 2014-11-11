@@ -1,33 +1,60 @@
 package network.klwcin.business
 
 import static org.springframework.http.HttpStatus.*
-import grails.plugin.springsecurity.annotation.Secured;
 import grails.transaction.Transactional
+import grails.plugin.springsecurity.annotation.Secured
 
 @Transactional(readOnly = true)
-@Secured(['ROLE_ADMIN'])
+@Secured(['ROLE_ADMIN', 'ROLE_USER', 'ROLE_NONE'])
 class ExpenseController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "PUT", delete: ["DELETE", 'GET'], edit: ["PUT", 'GET']]
+	def springSecurityService
+	
+	private redirectToIndex() {
+		redirect (['params': session["expenseParams"]] << [action:'index', method:'GET'])
+	}
+	
+	private saveParams() {
+		session["expenseParams"] = [
+			'search': params.search,
+			'offset': params.offset,
+			'max': params.max,
+			'sort': params.sort,
+			'order': params.order
+		]
+	}
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Expense.list(params), model:[expenseInstanceCount: Expense.count()]
-    }
-
-    def show(Expense expenseInstance) {
-        respond expenseInstance
+		String search = ''
+		
+		saveParams()
+		
+		if (params.search) {
+			search = params.search.replace('*', '%')
+			search = search.replace('?', '_')
+			search = search.trim()
+		}
+		
+		if (params.sort == null || params.sort == '') {
+			params.sort = 'id'
+		}
+		
+		//modify here to implant search by the field you want
+		respond Expense.createCriteria().list(params) {
+			like('description', "%${search}%")
+		}, model:[expenseInstanceCount: Expense.count()]
     }
 
     def create() {
-		
-		Expense e = new Expense()
-		
-		//the server is UTC (GMT)
-		e.date = new Date()
-		e.date.hours -= 3
-		
-        respond e
+		if(springSecurityService.currentUser.getType() == "Counselor") {
+			Expense expenseInstance = new Expense(params)
+			respond expenseInstance
+		} else {
+			flash.message = message(code: "You don't have sufficient privileges to create a new expense!")
+			redirectToIndex()
+		}
     }
 
     @Transactional
@@ -38,7 +65,8 @@ class ExpenseController {
         }
 
         if (expenseInstance.hasErrors()) {
-            respond expenseInstance.errors, view:'create'
+            flash.errors = expenseInstance.errors
+			redirect action:'create'
             return
         }
 
@@ -46,8 +74,8 @@ class ExpenseController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'expense.label', default: 'Expense'), expenseInstance.id])
-                redirect expenseInstance
+                flash.successMessage = message(code: 'default.created.message', args: [message(code: 'expense.label', default: 'Expense'), expenseInstance.id])
+                redirectToIndex()
             }
             '*' { respond expenseInstance, [status: CREATED] }
         }
@@ -65,7 +93,8 @@ class ExpenseController {
         }
 
         if (expenseInstance.hasErrors()) {
-            respond expenseInstance.errors, view:'edit'
+            flash.errors = expenseInstance.errors
+            respond expenseInstance.errors, view: 'edit'
             return
         }
 
@@ -73,8 +102,8 @@ class ExpenseController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Expense.label', default: 'Expense'), expenseInstance.id])
-                redirect expenseInstance
+                flash.successMessage = message(code: 'default.updated.message', args: [message(code: 'Expense.label', default: 'Expense'), expenseInstance.id])
+                redirectToIndex()
             }
             '*'{ respond expenseInstance, [status: OK] }
         }
@@ -88,15 +117,19 @@ class ExpenseController {
             return
         }
 
-        expenseInstance.delete flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Expense.label', default: 'Expense'), expenseInstance.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
+		if(springSecurityService.currentUser.getType() != "Counselor") {
+			flash.message = message(code: "You don't have sufficient privileges to delete expenses!")
+		} else {
+	        expenseInstance.delete flush:true
+	
+	        request.withFormat {
+	            form multipartForm {
+	                flash.successMessage = message(code: 'default.deleted.message', args: [message(code: 'Expense.label', default: 'Expense'), expenseInstance.id])
+	            }
+	            '*'{ render status: NO_CONTENT }
+	        }
+		}
+		redirectToIndex()
     }
 
     protected void notFound() {

@@ -106,8 +106,10 @@
 		<!-- / USER LIST PAGE CONTENT -->
 		
 		<!-- DELETE MODAL -->
-		<g:render template="modal-confirm-remove-user" />
+		<g:render template="modal-confirm-remove" />
 		<!-- / DELETE MODAL -->
+		
+		<asset:javascript src="user.js"/>
 		
 		</div>
 	</body>

@@ -8,7 +8,7 @@ class Expense {
 	
 	Date date
 	String description
-	Float value
+	Double value
 
 	static constraints = {
 		description(size: 0..100)

@@ -108,8 +108,10 @@
 		<!-- / USER LIST PAGE CONTENT -->
 		
 		<!-- DELETE MODAL -->
-		<g:render template="modal-confirm-remove-meeting" />
+		<g:render template="modal-confirm-remove" />
 		<!-- / DELETE MODAL -->
+		
+		<asset:javascript src="meeting.js"/>
 		
 		</div>
 	</body>

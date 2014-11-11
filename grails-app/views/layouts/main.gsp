@@ -48,6 +48,7 @@
 		<!-- FOOTER -->
 		<div id="footer">
 			<div class="container">
+				<a href="${createLink(uri: '/chat')}" id="chat" title="Network chat"><span class="pull-right fa fa-plus"></span></a>
 				<p class="copy">Copyright &copy; 2014 KLWCIn. All rights reserved.</p>
 			</div>
 		</div>

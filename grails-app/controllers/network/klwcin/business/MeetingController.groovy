@@ -56,16 +56,21 @@ class MeetingController {
 	
 	@Transactional
 	def participate(Meeting meetingInstance) {
-		meetingInstance.participants.add(springSecurityService.currentUser)
-		
-		meetingInstance.save flush:true
-		
-		request.withFormat {
-			form multipartForm {
-				flash.successMessage = message(code: 'Participation confirmed!')
-				redirectToIndex()
-			}
-			'*'{ respond meetingInstance, [status: OK] }
+		if (meetingInstance.date > new Date(hours: (new Date()).hours -= 3)) {
+            meetingInstance.participants.add(springSecurityService.currentUser)
+            
+            meetingInstance.save flush:true
+            
+            request.withFormat {
+                form multipartForm {
+                    flash.successMessage = message(code: 'Participation confirmed!')
+                    redirectToIndex()
+                }
+                '*'{ respond meetingInstance, [status: OK] }
+            }
+		} else {
+			flash.message = message(code: 'This is a past meeting, you cannot participate anymore!')
+			redirectToIndex()
 		}
 	}
 
@@ -107,7 +112,7 @@ class MeetingController {
 
         request.withFormat {
             form multipartForm {
-                flash.successMessage = message(code: 'meeting.created.message', args: [message(code: 'meeting.label', default: 'Meeting'), meetingInstance.date])
+                flash.successMessage = message(code: 'meeting.created.message', args: [message(code: 'meeting.label', default: 'Meeting'), meetingInstance.place, meetingInstance.date])
                 redirectToIndex()
             }
             '*' { respond meetingInstance, [status: CREATED] }
@@ -142,7 +147,7 @@ class MeetingController {
 							
 				request.withFormat {
 					form multipartForm {
-						flash.successMessage = message(code: 'meeting.updated.message', args: [message(code: 'Meeting.label', default: 'Meeting'), meetingInstance.date])
+						flash.successMessage = message(code: 'meeting.updated.message', args: [message(code: 'Meeting.label', default: 'Meeting'), meetingInstance.place, meetingInstance.date])
 						redirectToIndex()
 					}
 					'*'{ respond meetingInstance, [status: OK] }
@@ -159,7 +164,7 @@ class MeetingController {
 				
 				request.withFormat {
 					form multipartForm {
-						flash.successMessage = message(code: 'meeting.updated.message', args: [message(code: 'Meeting.label', default: 'Meeting'), meetingInstance.date])
+						flash.successMessage = message(code: 'meeting.updated.message', args: [message(code: 'Meeting.label', default: 'Meeting'), meetingInstance.place, meetingInstance.date])
 						redirectToIndex()
 					}
 					'*'{ respond meetingInstance, [status: OK] }
@@ -183,7 +188,7 @@ class MeetingController {
 				
 				request.withFormat {
 					form multipartForm {
-						flash.successMessage = message(code: 'meeting.deleted.message', args: [message(code: 'Meeting.label', default: 'Meeting'), meetingInstance.date])
+						flash.successMessage = message(code: 'meeting.deleted.message', args: [message(code: 'Meeting.label', default: 'Meeting'), meetingInstance.place, meetingInstance.date])
 					}
 					'*'{ render status: NO_CONTENT }
 				}

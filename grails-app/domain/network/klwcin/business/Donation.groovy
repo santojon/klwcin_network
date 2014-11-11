@@ -8,7 +8,7 @@ class Donation {
 	Date date
 	String type
 	String description
-	Float value
+	Double value
 
     static constraints = {
 		description(size: 0..100)

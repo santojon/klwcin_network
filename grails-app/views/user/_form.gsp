@@ -42,51 +42,75 @@
 			<br />
 		</div>
 		
+		<g:if test="${User.get(session.SPRING_SECURITY_CONTEXT.authentication.principal.id).getType().equals("Counselor")}">
 		<div class="col-lg-1">	
 			<div class="input-group fieldcontain ${hasErrors(bean: userInstance, field: 'enabled', 'error')} required"">
     			<span class="input-group-addon"><g:message code="user.enabled.label" default="Enabled:" /></span>
     			<span class="input-group-addon">
-    			<g:if test="${User.get(session.SPRING_SECURITY_CONTEXT.authentication.principal.id).getType().equals("Counselor")}">
 					<g:checkBox name="enabled" value="${userInstance?.enabled}" />
-				</g:if>
-				<g:if test="${!User.get(session.SPRING_SECURITY_CONTEXT.authentication.principal.id).getType().equals("Counselor")}">
-					<g:checkBox disabled="" name="enabled" value="${userInstance?.enabled}" />
-				</g:if>
 				<br />
 				</span>
       		</div>
 		</div>
+		</g:if>
+		
+		<g:if test="${!User.get(session.SPRING_SECURITY_CONTEXT.authentication.principal.id).getType().equals("Counselor")}">
+			<div disabled="" class="col-lg-1">	
+			<div class="input-group fieldcontain ${hasErrors(bean: userInstance, field: 'enabled', 'error')} required"">
+    			<span class="input-group-addon"><g:message code="user.enabled.label" default="Enabled:" /></span>
+    			<span class="input-group-addon">
+					<g:checkBox name="enabled" value="${userInstance?.enabled}" />
+				<br />
+				</span>
+      		</div>
+		</div>
+		</g:if>
 	 </div>
 	 
 	 <div class="row">
+	 <g:if test="${User.get(session.SPRING_SECURITY_CONTEXT.authentication.principal.id).getType().equals("Counselor")}">
 		<div class="col-lg-3">
     		<div class="input-group fieldcontain ${hasErrors(bean: userInstance, field: 'type', 'error')} required"">
     			<span class="input-group-addon"><g:message code="user.type.label" default="Type:" /></span>
-    			<g:if test="${User.get(session.SPRING_SECURITY_CONTEXT.authentication.principal.id).getType().equals("Counselor")}">
 					<g:select class="form-control" name="type" from="${userInstance.constraints.type.inList}" required="" value="${userInstance?.type}" valueMessagePrefix="user.type"/>
-				</g:if>
-				<g:if test="${!User.get(session.SPRING_SECURITY_CONTEXT.authentication.principal.id).getType().equals("Counselor")}">
-					<g:select class="form-control" disabled="" name="type" from="${userInstance.constraints.type.inList}" required="" value="${userInstance?.type}" valueMessagePrefix="user.type"/>
-				</g:if>
       		</div>
 			<br />
 		</div>
+		</g:if>
 		
+		<g:if test="${!User.get(session.SPRING_SECURITY_CONTEXT.authentication.principal.id).getType().equals("Counselor")}">
+			<div hidden="" class="col-lg-3">
+				<div class="input-group fieldcontain ${hasErrors(bean: userInstance, field: 'type', 'error')} required"">
+					<span class="input-group-addon"><g:message code="user.type.label" default="Type:" /></span>
+					<g:select class="form-control" name="type" from="${userInstance.constraints.type.inList}" required="" value="${userInstance?.type}" valueMessagePrefix="user.type"/>
+				</div>
+			<br />
+		</div>
+		</g:if>
+		
+		<g:if test="${User.get(session.SPRING_SECURITY_CONTEXT.authentication.principal.id).getType().equals("Counselor")}">
 		<div class="col-lg-2">
     		<div class="input-group fieldcontain ${hasErrors(bean: userInstance, field: 'accountLocked', 'error')} required"">
     			<span class="input-group-addon"><g:message code="user.accountLocked.label" default="Account Locked:" /></span>
     			<span class="input-group-addon">
-    			<g:if test="${User.get(session.SPRING_SECURITY_CONTEXT.authentication.principal.id).getType().equals("Counselor")}">
 					<g:checkBox name="accountLocked" value="${userInstance?.accountLocked}" />
-				</g:if>
-				<g:if test="${!User.get(session.SPRING_SECURITY_CONTEXT.authentication.principal.id).getType().equals("Counselor")}">
-					<g:checkBox disabled="" name="accountLocked" value="${userInstance?.accountLocked}" />
-				</g:if>
 				<br />
 				</span>
       		</div>
 		</div>
+		</g:if>
 		
+		<g:if test="${!User.get(session.SPRING_SECURITY_CONTEXT.authentication.principal.id).getType().equals("Counselor")}">
+			<div hidden="" class="col-lg-2">
+    		<div class="input-group fieldcontain ${hasErrors(bean: userInstance, field: 'accountLocked', 'error')} required"">
+    			<span class="input-group-addon"><g:message code="user.accountLocked.label" default="Account Locked:" /></span>
+    			<span class="input-group-addon">
+					<g:checkBox name="accountLocked" value="${userInstance?.accountLocked}" />
+				<br />
+				</span>
+      		</div>
+		</div>
+		</g:if>
 		
 	 </div>
 
