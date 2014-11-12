@@ -124,6 +124,26 @@ ul {list-style:none}
 .alert .close {font-size:22px; font-weight:bolder; line-height:1; text-shadow:0 1px 0 #ffffff; opacity:0.4; filter:alpha(opacity=40)}
 .alert .close:hover, .close:focus {text-decoration:none; opacity:0.9; filter:alpha(opacity=90)}
 
+/*Chat Messages*/
+.username {
+  font-size: 14px;
+  font-weight: normal;
+  text-align: center;
+  color: #90342C;
+}
+
+.msg {
+	font-size: 12px;
+  	font-weight: normal;
+  	color: #686868;
+}
+
+.date {
+	color: #c1c1c1;
+	font-size: 10px;
+	font-weight: normal;
+}
+
 /* Pagination */
 .pagination-container {margin:0 auto 20px; -webkit-border-radius:5px; background:#f9f8f8}
 .pagination-msg {padding:12px 16px 9px; float:left; font-size:13px; color:#686868 !important}

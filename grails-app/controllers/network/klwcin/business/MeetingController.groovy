@@ -8,7 +8,7 @@ import grails.transaction.Transactional
 @Secured(['ROLE_ADMIN', 'ROLE_USER', 'ROLE_NONE'])
 class MeetingController {
 
-     static allowedMethods = [save: "POST", update: "PUT", delete: ["DELETE", 'GET'], edit: ["PUT", 'GET']]
+    static allowedMethods = [save: "POST", update: "PUT", delete: ["DELETE", 'GET'], edit: ["PUT", 'GET']]
 	def springSecurityService
 	
 	private redirectToIndex() {
