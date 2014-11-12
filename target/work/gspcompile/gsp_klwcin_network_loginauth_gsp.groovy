@@ -72,9 +72,15 @@ protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1414991943648L
+public static final long LAST_MODIFIED = 1415140308156L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'
 public static final String TAGLIB_CODEC = 'none'
 }
+
+@org.codehaus.groovy.grails.web.transform.LineNumber(
+	lines = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 5, 5, 7, 8, 8, 9, 9, 9, 13, 14, 14, 14, 16, 16, 18, 24, 24, 24, 24, 33, 33, 36, 36, 39, 39, 41, 41, 45, 45, 53, 53, 61, 61, 61, 61, 61, 61, 62, 62, 67, 67, 76, 76, 76, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+	sourceName = "auth.gsp"
+)
+class ___LineNumberPlaceholder { }

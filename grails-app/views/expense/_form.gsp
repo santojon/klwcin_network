@@ -1,7 +1,5 @@
 <%@ page import="network.klwcin.business.Expense" %>
 
-
-
 <g:if test="${'[ROLE_ADMIN]' in session.SPRING_SECURITY_CONTEXT.authentication.principal.authorities.toString()}">
 <div class="col-lg-6">
 	<div class="input-group fieldcontain ${hasErrors(bean: expenseInstance, field: 'description', 'error')} required">
@@ -20,7 +18,7 @@
 		<span class="input-group-addon">
 			<g:message code="expense.description.label" default="Description" />
 		</span>
-		<g:textField class="form-control" name="description" maxlength="100" required="" value="${expenseInstance?.description}"/>
+		<g:textField disabled="" class="form-control" name="description" maxlength="100" required="" value="${expenseInstance?.description}"/>
 
 	</div>
 </div>
@@ -32,7 +30,7 @@
 		<span class="input-group-addon">
 			<g:message code="expense.description.label" default="Description" />
 		</span>
-		<g:textField class="form-control" name="description" maxlength="100" required="" value="${expenseInstance?.description}"/>
+		<g:textField disabled="" class="form-control" name="description" maxlength="100" required="" value="${expenseInstance?.description}"/>
 
 	</div>
 </div>
@@ -56,7 +54,7 @@
 		<span class="input-group-addon">
 			<g:message code="expense.value.label" default="Value" />
 		</span>
-		<g:field class="form-control" name="value" value="${fieldValue(bean: expenseInstance, field: 'value')}" required=""/>
+		<g:field disabled="" class="form-control" name="value" value="${fieldValue(bean: expenseInstance, field: 'value')}" required=""/>
 
 	</div>
 </div>
@@ -68,7 +66,7 @@
 		<span class="input-group-addon">
 			<g:message code="expense.value.label" default="Value" />
 		</span>
-		<g:field class="form-control" name="value" value="${fieldValue(bean: expenseInstance, field: 'value')}" required=""/>
+		<g:field disabled="" class="form-control" name="value" value="${fieldValue(bean: expenseInstance, field: 'value')}" required=""/>
 
 	</div>
 </div>
@@ -92,8 +90,9 @@
 		<span class="input-group-addon">
 			<g:message code="expense.date.label" default="Date" />
 		</span>
-		<g:datePicker class="form-control" name="date" precision="day"  value="${expenseInstance?.date}"  />
-
+		<div class="disabled">
+			<g:datePicker class="form-control" name="date" precision="day"  value="${expenseInstance?.date}"  />
+		</div>
 	</div>
 </div>
 </g:if>
@@ -104,8 +103,9 @@
 		<span class="input-group-addon">
 			<g:message code="expense.date.label" default="Date" />
 		</span>
-		<g:datePicker class="form-control" name="date" precision="day"  value="${expenseInstance?.date}"  />
-
+		<div class="disabled">
+			<g:datePicker class="form-control" name="date" precision="day"  value="${expenseInstance?.date}"  />
+		</div>
 	</div>
 </div>
 </g:if>

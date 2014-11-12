@@ -15,20 +15,12 @@
 		<div class="main-content" role="main">
 		
 			<!-- TITLE -->
-				<h1 class="page-title" id="title_index" >Welcome to KLWCIn Network</h1>
+				<h1 class="page-title" id="title_index" >Welcome to KLWCIn Network!</h1>
 			<!-- / TITLE -->
 			
-			<div id=info role="main">
-				<p>Congratulations, you have successfully entered the network. It means you are one of us. Try to make something here.</p>
-				
-				<br>
-				<h2>Latest News</h2>
-				<br>
-				
-				<p>We're here! Modernized version 0.2 beta is now online!</p>
-				<p>Wow! Our beta is in very test! Such dangerous! <s>Much unstable database!</s> Wow!</p>
-				<p>Database is now ok! New functionalities coming... Very supimpa, hum?!</p>
-				<br>
+			<div class="jumbotrom well" id=info role="main">
+				<p>We're here! Modernized <span class="txt-bold">version 0.3 beta</span> is on the run!</p>
+				<p>Congratulations, you have successfully entered the network. <span class="txt-bold">It means you are one of us!</span> Try to make something here.</p>
 			</div>
 			
 			<!-- GRID -->
@@ -82,6 +74,12 @@
 		<div id="table-filter">
 		<div id="status" role="complementary" class="filter-container clearfix">
 			<div class="panel-group" id="accordion">
+				<h2>Latest News</h2>
+				<div class="jumbotrom well">
+					<p>New <span class="txt-bold">Finances module</span> is operational! Now we can see our donations and expenses!</p>
+					<p><span class="txt-bold">Network chat is now online!</span> search for the <a href="#"><span class="glyphicon glyphicon-comment"></span></a> icon.</p>
+					<p>New functionalities coming... Very supimpa, hum?!</p>
+				</div>
 			
 				<!-- LATERAL BAR -->				
 				<div class="panel panel-default">

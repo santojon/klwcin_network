@@ -32,67 +32,41 @@ invokeTag('captureHead','sitemesh',8,[:],1)
 printHtmlPart(2)
 createTagBody(1, {->
 printHtmlPart(3)
-invokeTag('message','g',10,['code':("default.link.skip.label"),'default':("Skip to content&hellip;")],-1)
+invokeTag('message','g',11,['code':("default.edit.label"),'args':([entityName])],-1)
 printHtmlPart(4)
 createTagBody(2, {->
-invokeTag('message','g',13,['code':("default.list.label"),'args':([entityName])],-1)
-})
-invokeTag('link','g',13,['class':("list"),'action':("index")],2)
 printHtmlPart(5)
-createTagBody(2, {->
-invokeTag('message','g',14,['code':("default.new.label"),'args':([entityName])],-1)
-})
-invokeTag('link','g',14,['class':("create"),'action':("create")],2)
+invokeTag('hiddenField','g',14,['name':("version"),'value':(expenseInstance?.version)],-1)
 printHtmlPart(6)
-invokeTag('message','g',18,['code':("default.edit.label"),'args':([entityName])],-1)
+invokeTag('render','g',18,['template':("/general/show-flash-messages")],-1)
 printHtmlPart(7)
-if(true && (flash.message)) {
+invokeTag('render','g',22,['template':("form")],-1)
 printHtmlPart(8)
-expressionOut.print(flash.message)
+if(true && ('[ROLE_ADMIN]' in session.SPRING_SECURITY_CONTEXT.authentication.principal.authorities.toString())) {
 printHtmlPart(9)
 }
 printHtmlPart(10)
-createTagBody(2, {->
+})
+invokeTag('form','g',35,['url':([resource:expenseInstance, action:'update']),'method':("PUT")],2)
 printHtmlPart(11)
-createTagBody(3, {->
+})
+invokeTag('captureBody','sitemesh',37,[:],1)
 printHtmlPart(12)
-if(true && (error in org.springframework.validation.FieldError)) {
-printHtmlPart(13)
-expressionOut.print(error.field)
-printHtmlPart(14)
-}
-printHtmlPart(15)
-invokeTag('message','g',25,['error':(error)],-1)
-printHtmlPart(16)
-})
-invokeTag('eachError','g',26,['bean':(expenseInstance),'var':("error")],3)
-printHtmlPart(17)
-})
-invokeTag('hasErrors','g',28,['bean':(expenseInstance)],2)
-printHtmlPart(10)
-createTagBody(2, {->
-printHtmlPart(18)
-invokeTag('hiddenField','g',30,['name':("version"),'value':(expenseInstance?.version)],-1)
-printHtmlPart(19)
-invokeTag('render','g',32,['template':("form")],-1)
-printHtmlPart(20)
-invokeTag('actionSubmit','g',35,['class':("save"),'action':("update"),'value':(message(code: 'default.button.update.label', default: 'Update'))],-1)
-printHtmlPart(21)
-})
-invokeTag('form','g',37,['url':([resource:expenseInstance, action:'update']),'method':("PUT")],2)
-printHtmlPart(22)
-})
-invokeTag('captureBody','sitemesh',39,[:],1)
-printHtmlPart(23)
 }
 public static final Map JSP_TAGS = new HashMap()
 protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1409702941994L
+public static final long LAST_MODIFIED = 1415667058561L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'
 public static final String TAGLIB_CODEC = 'none'
 }
+
+@org.codehaus.groovy.grails.web.transform.LineNumber(
+	lines = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 9, 11, 11, 11, 11, 14, 14, 14, 14, 18, 18, 22, 22, 28, 28, 30, 30, 35, 35, 35, 37, 37, 37, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+	sourceName = "edit.gsp"
+)
+class ___LineNumberPlaceholder { }

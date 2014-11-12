@@ -64,26 +64,34 @@ invokeTag('message','g',45,['code':("spinner.alt"),'default':("Loading&hellip;")
 printHtmlPart(15)
 invokeTag('layoutBody','g',46,[:],-1)
 printHtmlPart(16)
-invokeTag('javascript','asset',56,['src':("klwcin.js")],-1)
+expressionOut.print(createLink(uri: '/chat'))
+printHtmlPart(17)
+invokeTag('javascript','asset',57,['src':("klwcin.js")],-1)
 printHtmlPart(1)
-invokeTag('javascript','asset',57,['src':("jquery.js")],-1)
+invokeTag('javascript','asset',58,['src':("jquery.js")],-1)
 printHtmlPart(1)
-invokeTag('javascript','asset',58,['src':("jquery.mask.js")],-1)
+invokeTag('javascript','asset',59,['src':("jquery.mask.js")],-1)
 printHtmlPart(1)
-invokeTag('javascript','asset',59,['src':("bootstrap.min.js")],-1)
+invokeTag('javascript','asset',60,['src':("bootstrap.min.js")],-1)
 printHtmlPart(11)
 })
-invokeTag('captureBody','sitemesh',60,['onload':("init('${resource()}'); setActive('${controllerName}');")],1)
-printHtmlPart(17)
+invokeTag('captureBody','sitemesh',61,['onload':("init('${resource()}'); setActive('${controllerName}'); setTopActive('${controllerName}');")],1)
+printHtmlPart(18)
 }
 public static final Map JSP_TAGS = new HashMap()
 protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1414992672295L
+public static final long LAST_MODIFIED = 1415770091695L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'
 public static final String TAGLIB_CODEC = 'none'
 }
+
+@org.codehaus.groovy.grails.web.transform.LineNumber(
+	lines = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 9, 9, 9, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 12, 12, 12, 13, 13, 14, 14, 15, 15, 18, 18, 21, 21, 24, 25, 25, 26, 26, 26, 30, 31, 31, 31, 34, 35, 35, 35, 36, 38, 38, 38, 38, 42, 42, 45, 45, 46, 46, 51, 51, 57, 58, 58, 59, 59, 60, 60, 61, 61, 61, 61, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+	sourceName = "main.gsp"
+)
+class ___LineNumberPlaceholder { }

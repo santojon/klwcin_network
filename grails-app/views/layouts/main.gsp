@@ -33,7 +33,7 @@
 		
 		<g:layoutHead/>
 	</head>
-	<body onload="init('${resource()}'); setActive('${controllerName}');">
+	<body onload="init('${resource()}'); setActive('${controllerName}'); setTopActive('${controllerName}');">
 		<!-- HEADER -->
 			<g:render template="/layouts/header" model="systemConfigurationInstance: network.klwcin.configuration.SystemConfiguration.getConfig()" /> <!-- systemConfigurations -->
 		<!-- / HEADER -->

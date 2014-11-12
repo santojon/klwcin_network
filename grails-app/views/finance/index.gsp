@@ -13,7 +13,7 @@
 		<div class="main-content" role="main">
 			
 			<!-- TITLE -->
-			<h1 class="page-title" id="title_index" >Finances balance</h1>
+			<h1 class="page-title" id="title_index" >Finances Balance</h1>
 			<!-- / TITLE -->
 		
 			<!-- BUTTONS -->
@@ -22,19 +22,21 @@
 					<div class="pull-left">
 					<g:form url="[controller: 'donation', action:'create']" method="POST" id="create_donation_form" >
 						<button type="submit" id="btn_create_donation" class="btn btn-danger create-form-button">
-							<span class="fa fa-plus"></span> Add Donation
+							<span class="fa fa-plus"></span> Donation
 						</button>
 					</g:form>
 					</div>
 					
-					<div class="pull-right">
+					<div>
 					<g:form url="[controller: 'expense', action:'create']" method="POST" id="create_expense_form" >
-						<button type="submit" id="btn_create_expense" class="btn btn-danger create-form-button">
-							<span class="fa fa-plus"></span> Add Expense
+						<button style="margin-left: 10px;" type="submit" id="btn_create_expense" class="btn btn-danger create-form-button">
+							<span class="fa fa-plus"></span> Expense
 						</button>
 					</g:form>
 					</div>
 				</sec:ifAllGranted>
+				
+				<div class="clearfix"></div>
 			</div>
 			<!-- / BUTTONS -->
 			

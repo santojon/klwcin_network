@@ -27,15 +27,15 @@ invokeTag('captureHead','sitemesh',6,[:],1)
 printHtmlPart(3)
 createTagBody(1, {->
 printHtmlPart(4)
-invokeTag('sortableColumn','g',43,['property':("place"),'title':(message(code: 'meeting.place.label', default: 'Place'))],-1)
+invokeTag('sortableColumn','g',35,['property':("place"),'title':(message(code: 'meeting.place.label', default: 'Place'))],-1)
 printHtmlPart(5)
-invokeTag('sortableColumn','g',44,['property':("date"),'title':(message(code: 'meeting.date.label', default: 'Date'))],-1)
+invokeTag('sortableColumn','g',36,['property':("date"),'title':(message(code: 'meeting.date.label', default: 'Date'))],-1)
 printHtmlPart(5)
-invokeTag('sortableColumn','g',45,['property':("type"),'title':(message(code: 'meeting.type.label', default: 'Type'))],-1)
+invokeTag('sortableColumn','g',37,['property':("type"),'title':(message(code: 'meeting.type.label', default: 'Type'))],-1)
 printHtmlPart(5)
-invokeTag('sortableColumn','g',46,['property':("total"),'title':(message(code: 'Total of participants'))],-1)
+invokeTag('sortableColumn','g',38,['property':("total"),'title':(message(code: 'Total of participants'))],-1)
 printHtmlPart(5)
-invokeTag('sortableColumn','g',47,['property':("description"),'title':(message(code: 'meeting.description.label', default: 'Description'))],-1)
+invokeTag('sortableColumn','g',39,['property':("description"),'title':(message(code: 'meeting.description.label', default: 'Description'))],-1)
 printHtmlPart(6)
 if(true && (meetings == [])) {
 printHtmlPart(7)
@@ -53,7 +53,7 @@ expressionOut.print(fieldValue(bean: meetingInstance, field: "place"))
 printHtmlPart(12)
 expressionOut.print(meetingInstance.id)
 printHtmlPart(11)
-invokeTag('formatDate','g',65,['format':("dd/MM/yy - HH:mm"),'date':(meetingInstance.date)],-1)
+invokeTag('formatDate','g',57,['format':("dd/MM/yy - HH:mm"),'date':(meetingInstance.date)],-1)
 printHtmlPart(12)
 expressionOut.print(meetingInstance.id)
 printHtmlPart(11)
@@ -120,7 +120,7 @@ i++
 }
 printHtmlPart(21)
 })
-invokeTag('captureBody','sitemesh',155,[:],1)
+invokeTag('captureBody','sitemesh',153,[:],1)
 printHtmlPart(22)
 }
 public static final Map JSP_TAGS = new HashMap()
@@ -128,9 +128,15 @@ protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1414992701206L
+public static final long LAST_MODIFIED = 1415774342221L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'
 public static final String TAGLIB_CODEC = 'none'
 }
+
+@org.codehaus.groovy.grails.web.transform.LineNumber(
+	lines = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 4, 4, 5, 5, 5, 5, 5, 5, 6, 6, 6, 7, 35, 35, 35, 36, 36, 37, 37, 38, 38, 39, 39, 39, 46, 46, 51, 51, 54, 54, 54, 54, 55, 55, 56, 56, 56, 56, 57, 57, 57, 57, 58, 58, 58, 58, 59, 59, 59, 59, 60, 60, 60, 60, 63, 63, 63, 63, 95, 95, 95, 96, 96, 96, 97, 97, 97, 97, 98, 99, 99, 99, 99, 99, 115, 115, 115, 116, 116, 116, 117, 117, 117, 117, 118, 119, 119, 119, 119, 119, 135, 135, 135, 136, 136, 136, 137, 137, 137, 137, 138, 139, 139, 139, 139, 139, 153, 153, 153, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+	sourceName = "index.gsp"
+)
+class ___LineNumberPlaceholder { }

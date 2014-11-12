@@ -14,7 +14,7 @@
 		<div class="main-content" role="main">
 		
 			<!-- TITLE -->
-			<h1 class="page-title" id="title_index">Donation</h1>
+			<h1 class="page-title" id="title_index">Donations</h1>
 			<!-- / TITLE -->
 			
 			<!-- BUTTONS / SEARCH -->

@@ -113,20 +113,28 @@ i++
 printHtmlPart(29)
 invokeTag('render','g',104,['template':("/general/pagination-header"),'model':(['myList':meetingInstanceList, 'paginationId':'pagination_bottom'])],-1)
 printHtmlPart(30)
-invokeTag('render','g',111,['template':("modal-confirm-remove-meeting")],-1)
+invokeTag('render','g',111,['template':("modal-confirm-remove")],-1)
 printHtmlPart(31)
-})
-invokeTag('captureBody','sitemesh',115,[:],1)
+invokeTag('javascript','asset',114,['src':("meeting.js")],-1)
 printHtmlPart(32)
+})
+invokeTag('captureBody','sitemesh',117,[:],1)
+printHtmlPart(33)
 }
 public static final Map JSP_TAGS = new HashMap()
 protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1414985938151L
+public static final long LAST_MODIFIED = 1415665225151L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'
 public static final String TAGLIB_CODEC = 'none'
 }
+
+@org.codehaus.groovy.grails.web.transform.LineNumber(
+	lines = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 9, 21, 21, 21, 21, 27, 27, 27, 29, 29, 33, 33, 33, 33, 37, 37, 37, 44, 44, 48, 48, 51, 51, 61, 62, 62, 63, 63, 64, 64, 65, 65, 65, 72, 72, 77, 77, 80, 80, 80, 80, 81, 81, 82, 82, 82, 82, 83, 83, 83, 83, 84, 84, 84, 84, 85, 85, 85, 85, 86, 86, 86, 86, 88, 89, 90, 90, 90, 90, 90, 90, 90, 90, 91, 91, 92, 92, 92, 95, 95, 95, 95, 104, 104, 111, 111, 114, 114, 117, 117, 117, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+	sourceName = "index.gsp"
+)
+class ___LineNumberPlaceholder { }
