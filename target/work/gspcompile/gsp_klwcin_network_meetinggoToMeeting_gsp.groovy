@@ -58,9 +58,3 @@ public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'
 public static final String TAGLIB_CODEC = 'none'
 }
-
-@org.codehaus.groovy.grails.web.transform.LineNumber(
-	lines = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 9, 12, 12, 12, 12, 14, 14, 18, 18, 22, 22, 35, 35, 35, 37, 37, 37, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-	sourceName = "goToMeeting.gsp"
-)
-class ___LineNumberPlaceholder { }

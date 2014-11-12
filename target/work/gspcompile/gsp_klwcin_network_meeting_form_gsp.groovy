@@ -112,9 +112,3 @@ public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'
 public static final String TAGLIB_CODEC = 'none'
 }
-
-@org.codehaus.groovy.grails.web.transform.LineNumber(
-	lines = [1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 5, 5, 8, 8, 9, 9, 10, 10, 16, 16, 17, 17, 18, 18, 26, 26, 27, 27, 28, 28, 34, 34, 35, 35, 36, 36, 44, 44, 47, 47, 49, 49, 51, 51, 51, 51, 51, 53, 53, 58, 58, 61, 61, 64, 64, 65, 65, 66, 66, 72, 72, 73, 73, 74, 74, 82, 82, 83, 83, 84, 84, 90, 90, 91, 91, 93, 93, 102, 102, 105, 105, 107, 107, 109, 109, 111, 111, 116, 116, 120, 120, 122, 122, 125, 125, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-	sourceName = "_form.gsp"
-)
-class ___LineNumberPlaceholder { }
